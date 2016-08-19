@@ -1,0 +1,273 @@
+<?php
+
+$this->headTitle('Index Slider - New Slide');
+
+$form = $this->form;
+$form->setElementDecorators(array('ViewHelper'));
+
+?>
+<div class="page-header">
+	<h1>Index Slider <small>New Slide</small></h1>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<?php echo $this->systemMessagesHtml($this->systemMessages);?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading text-right">
+				<div class="btn-group" role="group" aria-label="...">
+					<a 
+						href="<?php echo $this->url(array('controller' => 'admin_indexslides', 'action' => 'index'), 'default', true);?>"
+						class="btn btn-default"
+						><i class="glyphicon glyphicon-arrow-left"></i> Back to all Slides</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+					<input type="hidden" name="task" value="save">
+					<fieldset>
+
+						<!-- Form Name -->
+						<legend>New Slide</legend>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="title">Title</label>  
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('title')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => 'enter slide title',
+									'id' => 'title',
+									'required' => 'required'
+								));
+								?>
+								<span class="help-block">min 3 max 255 characters</span>  
+							</div>
+							<div class="col-md-4">
+								<?php if ($form->getElement('title')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('title')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+
+						<!-- Textarea -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="description">Description</label>
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('description')->setAttribs(array(
+									'class' => 'form-control',
+									'id' => 'description',
+									'rows' => 12,
+								));
+								?>
+							</div>
+							
+							<div class="col-md-4">
+								<?php if ($form->getElement('description')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('description')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="link_type">Link Type</label>  
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('link_type')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => '',
+									'id' => 'link_type',
+									'required' => 'required'
+								));
+								?>
+								<span class="help-block"></span>  
+							</div>
+							<div class="col-md-4">
+								<?php if ($form->getElement('link_type')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('link_type')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						<div class="form-group" id="link-label-container">
+							<label class="col-md-4 control-label" for="link_label">Link Label</label>  
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('link_label')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => '',
+									'id' => 'link_label',
+								));
+								?>
+								<span class="help-block"></span>  
+							</div>
+							<div class="col-md-4">
+								<?php if ($form->getElement('link_label')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('link_label')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						
+						<div class="form-group" id="sitemap-page-id-container">
+							<label class="col-md-4 control-label" for="sitemap_page_id">Sitemap Page ID</label>  
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('sitemap_page_id')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => '',
+									'id' => 'sitemap_page_id',
+								));
+								?>
+								<span class="help-block"></span>  
+							</div>
+							<div class="col-md-4">
+								<?php if ($form->getElement('sitemap_page_id')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('sitemap_page_id')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						<div class="form-group" id="internal-link-container">
+							<label class="col-md-4 control-label" for="internal_link_url">Internal Link URL</label>  
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('internal_link_url')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => '',
+									'id' => 'internal_link_url',
+								));
+								?>
+								<span class="help-block"></span>  
+							</div>
+							<div class="col-md-4">
+								<?php if ($form->getElement('internal_link_url')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('internal_link_url')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						<div class="form-group" id="external-link-container">
+							<label class="col-md-4 control-label" for="external_link_url">External Link URL</label>  
+							<div class="col-md-4">
+								<?php 
+								echo $form->getElement('external_link_url')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => '',
+									'id' => 'external_link_url'
+								));
+								?>
+								<span class="help-block"></span>  
+							</div>
+							<div class="col-md-4">
+								<?php if ($form->getElement('external_link_url')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('external_link_url')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="index_slide_photo">Photo</label>
+							<div class="col-md-4">
+								
+								<input type="file" name="index_slide_photo" id="index_slide_photo" class="form-control input-md">
+							</div>
+							
+							<div class="col-md-4">
+								<?php if ($form->getElement('index_slide_photo')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('index_slide_photo')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						<!-- Button (Double) -->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="new_indexSlide_cancel"></label>
+							<div class="col-md-8 text-right">
+								<a href="<?php echo $this->url(array('controller' => 'admin_indexslides', 'action' => 'index'), 'default', true);?>" id="new_indexSlide_cancel" name="new_indexSlide_cancel" class="btn btn-default">Cancel</a>
+								<button type="submit" id="new_indexSlide_submit" name="new_indexSlide_submit" class="btn btn-success">Save</button>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+<?php $this->inlineScript()->captureStart();?>
+	
+	$('#link_type').on('change', function(e) {
+		
+		e.stopPropagation();
+		
+		var target = $(this).is('#link_type') ? $(this) : $(this).closest('#link_type');
+		
+		var linkType = target.val();
+		
+		$('#link-label-container').hide();
+		$('#sitemap-page-id-container').hide();
+		$('#internal-link-container').hide();
+		$('#external-link-container').hide();
+		
+		switch (linkType) {
+			case 'SitemapPage':
+				$('#link-label-container').show();
+				$('#sitemap-page-id-container').show();
+				break;
+				
+			case 'InternalLink':
+				$('#link-label-container').show();
+				$('#internal-link-container').show();
+				break;
+				
+			case 'ExternalLink':
+				$('#link-label-container').show();
+				$('#external-link-container').show();
+				break;
+				
+		}
+	});
+	
+	$('#link_type').trigger('change');
+	
+<?php $this->inlineScript()->captureEnd();?>
+</script>

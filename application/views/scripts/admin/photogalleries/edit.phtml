@@ -1,0 +1,534 @@
+<?php
+
+$this->headTitle('Photo Galleries - Edit Photo Gallery');
+
+$form = $this->form;
+$form->setElementDecorators(array('ViewHelper'));
+?>
+<div class="page-header">
+	<h1>PhotoGalleries <small>Edit Photo Gallery</small></h1>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<?php echo $this->systemMessagesHtml($this->systemMessages);?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading text-right">
+				<div class="btn-group" role="group" aria-label="...">
+					<a 
+						href="<?php echo $this->url(array('controller' => 'admin_photogalleries', 'action' => 'index'), 'default', true);?>"
+						class="btn btn-default"
+						><i class="glyphicon glyphicon-arrow-left"></i> Back to all photoGalleries</a>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+					<input type="hidden" name="task" value="update">
+					
+					<fieldset>
+
+						<!-- Form Name -->
+						<legend>Edit Photo Gallery - <?php echo $this->escape($this->photoGallery['title']);?></legend>
+						
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="title">Title</label>  
+							<div class="col-md-7">
+								<?php 
+								echo $form->getElement('title')->setAttribs(array(
+									'class' => 'form-control input-md',
+									'placeholder' => 'enter photo gallery\'s title',
+									'id' => 'title',
+									'required' => 'required'
+								));
+								?>
+								<span class="help-block">min 3 max 255 characters</span>  
+							</div>
+							<div class="col-md-3">
+								<?php if ($form->getElement('title')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('title')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+
+						<!-- Textarea -->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="description">Description</label>
+							<div class="col-md-7">
+								<?php 
+								echo $form->getElement('description')->setAttribs(array(
+									'class' => 'form-control',
+									'id' => 'description',
+									'rows' => 12,
+								));
+								?>
+							</div>
+							
+							<div class="col-md-3">
+								<?php if ($form->getElement('description')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('description')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="photo_gallery_leading_photo">Leading Photo</label>
+							<div class="col-md-7">
+								<div>
+									<a href="#" class="thumbnail">
+										<img src="<?php echo $this->photoGalleryLeadingPhotoUrl($this->photoGallery);?>">
+									</a>
+								</div>
+								
+								<input type="file" name="photo_gallery_leading_photo" id="photo_gallery_leading_photo" class="form-control input-md">
+								<span class="help-block">change photo</span>
+							</div>
+							
+							<div class="col-md-3">
+								<?php if ($form->getElement('photo_gallery_leading_photo')->hasErrors()) {?>
+								<div class="has-error">
+									<?php foreach ($form->getElement('photo_gallery_leading_photo')->getMessages() as $message) {?>
+									<p class="help-block"><?php echo $this->escape($message);?></p>
+									<?php }?>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+
+						<!-- Button (Double) -->
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="new_photoGallery_cancel"></label>
+							<div class="col-md-10 text-right">
+								<a href="<?php echo $this->url(array('controller' => 'admin_photogalleries', 'action' => 'index'), 'default', true);?>" id="new_photoGallery_cancel" name="new_photoGallery_cancel" class="btn btn-default">Cancel</a>
+								<button type="submit" id="new_photoGallery_submit" name="new_photoGallery_submit" class="btn btn-success">Save</button>
+							</div>
+						</div>
+
+					</fieldset>
+				</form>
+
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading text-right">
+				<div class="btn-group" role="group" aria-label="...">
+					<button
+						data-action="save-order"
+						class="btn btn-success"
+						style="display: none;"
+					>
+						<i class="glyphicon glyphicon-save"></i>
+						Save Order
+					</button>
+					<button
+						data-action="toggle-sort"
+						class="btn btn-default"
+					>
+						<i class="glyphicon glyphicon-list"></i>
+						Change Order
+					</button>
+					<button 
+						data-action="add-photo"
+						class="btn btn-default"
+						><i class="glyphicon glyphicon-plus"></i> Add Photo</button>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table id="rows-table" class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="text-center">Img</th>
+							<th class="text-center">Status</th>
+							<th>Title</th>
+							<th>Description</th>
+							<th class="text-center">#</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php 
+						foreach ($this->photos as $photo) {
+							if ($photo['status'] == Application_Model_DbTable_CmsPhotos::STATUS_DISABLED) {
+							?>
+						<tr data-photo-id="<?php echo $this->escape($photo['id']);?>" class="danger">
+							<td class="text-center"><i data-action="sort" class="glyphicon glyphicon-list"  style="display: none; cursor: pointer;"></i></td>
+							<td class="text-center"><a href="<?php echo $this->photoUrl($photo);?>" target="_blank"><img style="max-height: 50px;" src="<?php echo $this->photoUrl($photo);?>"></a></td>
+							<td class="text-center"><span class="badge alert-danger" title="disabled"><i class="glyphicon glyphicon-remove"></i></span></td>
+							<td><?php echo $this->escape($photo['title']);?></td>
+							<td><?php echo $this->escape($photo['description']);?></td>
+							<td class="text-center">
+								<div class="btn-group btn-group-sm" role="group" aria-label="...">
+									<button data-photo-id="<?php echo $this->escape($photo['id']);?>" data-photo-title="<?php echo $this->escape($photo['title']);?>" data-photo-description="<?php echo $this->escape($photo['description']);?>" data-action="edit" type="button" class="btn btn-default" title="edit"><i class="glyphicon glyphicon-pencil"></i></button>
+									<button data-photo-id="<?php echo $this->escape($photo['id']);?>" data-action="enable" type="button" class="btn btn-default" title="enable"><i class="glyphicon glyphicon-ok"></i></button>
+									<button data-photo-id="<?php echo $this->escape($photo['id']);?>" data-action="delete" type="button" class="btn btn-default" title="delete"><i class="glyphicon glyphicon-trash"></i></button>
+								</div>
+							</td>
+						</tr>
+							<?php
+							} else {
+							?>
+						<tr data-photo-id="<?php echo $this->escape($photo['id']);?>">
+							<td class="text-center"><i data-action="sort" class="glyphicon glyphicon-list" style="display: none; cursor: pointer;"></i></td>
+							<td class="text-center"><a href="<?php echo $this->photoUrl($photo);?>" target="_blank"><img style="max-height: 50px;" src="<?php echo $this->photoUrl($photo);?>"></a></td>
+							<td class="text-center"><span class="badge alert-success" title="enabled"><i class="glyphicon glyphicon-ok"></i></span></td>
+							<td><?php echo $this->escape($photo['title']);?></td>
+							<td><?php echo $this->escape($photo['description']);?></td>
+							<td class="text-center">
+								<div class="btn-group btn-group-sm" role="group" aria-label="...">
+									<button data-photo-id="<?php echo $this->escape($photo['id']);?>" data-photo-title="<?php echo $this->escape($photo['title']);?>" data-photo-description="<?php echo $this->escape($photo['description']);?>" data-action="edit" type="button" class="btn btn-default" title="edit"><i class="glyphicon glyphicon-pencil"></i></button>
+									<button data-photo-id="<?php echo $this->escape($photo['id']);?>" data-action="disable" type="button" class="btn btn-default" title="disable"><i class="glyphicon glyphicon-remove"></i></button>
+									<button data-photo-id="<?php echo $this->escape($photo['id']);?>" data-action="delete" type="button" class="btn btn-default" title="delete"><i class="glyphicon glyphicon-trash"></i></button>
+								</div>
+							</td>
+						</tr>
+							<?php
+							}
+							?>
+						
+							<?php
+						}
+						?>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_photos', 'action' => 'delete'), 'default', true);?>" id="delete-warning-dialog" class="modal fade" tabindex="-1" role="dialog">
+	<input type="hidden" name="task" value="delete">
+	<input type="hidden" name="id" value="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Delete photo</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete photo?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_photos', 'action' => 'disable'), 'default', true);?>" id="disable-warning-dialog" class="modal fade" tabindex="-1" role="dialog">
+	<input type="hidden" name="task" value="disable">
+	<input type="hidden" name="id" value="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Disable photo</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to disable photo?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Disable</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_photos', 'action' => 'enable'), 'default', true);?>" id="enable-warning-dialog" class="modal fade" tabindex="-1" role="dialog">
+	<input type="hidden" name="task" value="enable">
+	<input type="hidden" name="id" value="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Enable photo</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to enable photo?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Enable</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+
+<form method="post" enctype="multipart/form-data" action="<?php echo $this->url(array('controller' => 'admin_photos', 'action' => 'add'), 'default', true);?>" id="add-photo-dialog" class="modal fade form-horizontal" tabindex="-1" role="dialog">
+  <input type="hidden" name="task" value="save">
+  <input type="hidden" name="photo_gallery_id" value="<?php echo $this->escape($this->photoGallery['id']);?>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add photo</h4>
+      </div>
+      <fieldset class="modal-body">
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="photo_upload">Image</label>
+			<div class="col-md-9">
+				<input type="file" name="photo_upload" id="photo_upload" class="form-control input-md" required="required">
+				<span class="help-block">choose photo</span>
+			</div>
+		</div>
+		  
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="photo_title">Title</label>
+			<div class="col-md-9">
+				<input type="text" name="title" id="photo_title" class="form-control input-md">
+				<span class="help-block">Photo title</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="photo_description">Description</label>
+			<div class="col-md-9">
+				<input type="text" name="description" id="photo_description" class="form-control input-md">
+				<span class="help-block">Photo description</span>
+			</div>
+		</div>  
+		  
+      </fieldset>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Save</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_photos', 'action' => 'edit'), 'default', true);?>" id="edit-photo-dialog" class="modal fade form-horizontal" tabindex="-1" role="dialog">
+	<input type="hidden" name="task" value="update">
+	<input type="hidden" name="id" value="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit photo</h4>
+      </div>
+      <fieldset class="modal-body">
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="photo_title">Title</label>
+			<div class="col-md-9">
+				<input type="text" name="title" id="photo_title" class="form-control input-md">
+				<span class="help-block">Photo title</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="photo_description">Description</label>
+			<div class="col-md-9">
+				<input type="text" name="description" id="photo_description" class="form-control input-md">
+				<span class="help-block">Photo description</span>
+			</div>
+		</div>  
+		  
+      </fieldset>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-save"></i> Update</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_photos', 'action' => 'updateorder'), 'default', true);?>" style="display: none;" id="save-order-form">
+	<input type="hidden" name="task" value="saveOrder">
+	<input type="hidden" name="sorted_ids" value="">
+	<input type="hidden" name="photo_gallery_id" value="<?php echo $this->escape($this->photoGallery['id']);?>">
+</form>
+<?php
+$this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/jquery-ui-1.12.0/jquery-ui.min.css'));
+$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/jquery-ui-1.12.0/jquery-ui.min.js'));
+?>
+<script>
+<?php $this->inlineScript()->captureStart();?>
+	
+	$('#rows-table').on('click', '[data-action="delete"]', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		//calculate target element
+		var target = $(this).is('[data-action="delete"]') ? $(this) : $(this).closest('[data-action="delete"]');
+		
+		//get any attribute
+		var photoId = target.attr('data-photo-id');
+		
+		//get data- attributes
+		var photoId = target.data('photo-id');
+		
+		
+		//set value for input field with name "id"
+		$('#delete-warning-dialog').find('[name="id"]').val(photoId);
+		
+		$('#delete-warning-dialog').modal('show');
+	});
+	
+	$('#rows-table').on('click', '[data-action="disable"]', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		//calculate target element
+		var target = $(this).is('[data-action="disable"]') ? $(this) : $(this).closest('[data-action="disable"]');
+		
+		//get any attribute
+		var photoId = target.attr('data-photo-id');
+		
+		//get data- attributes
+		//var photoId = target.data('photoId');
+		
+		
+		//set value for input field with name "id"
+		$('#disable-warning-dialog').find('[name="id"]').val(photoId);
+		
+		$('#disable-warning-dialog').modal('show');
+	});
+	
+	$('#rows-table').on('click', '[data-action="enable"]', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		//calculate target element
+		var target = $(this).is('[data-action="enable"]') ? $(this) : $(this).closest('[data-action="enable"]');
+		
+		//get any attribute
+		var photoId = target.attr('data-photo-id');
+		
+		//get data- attributes
+		//var photoId = target.data('photoId');
+		
+		
+		//set value for input field with name "id"
+		$('#enable-warning-dialog').find('[name="id"]').val(photoId);
+		
+		$('#enable-warning-dialog').modal('show');
+	});
+	
+	$('#rows-table').on('click', '[data-action="edit"]', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		//calculate target element
+		var target = $(this).is('[data-action="edit"]') ? $(this) : $(this).closest('[data-action="edit"]');
+		
+		//get any attribute
+		var photoId = target.attr('data-photo-id');
+		var photoTitle = target.attr('data-photo-title');
+		var photoDescription = target.attr('data-photo-description');
+		
+		//get data- attributes
+		//var photoId = target.data('photoId');
+		
+		var editPhotoDialog = $('#edit-photo-dialog');
+		
+		//set value for input field with name "id"
+		editPhotoDialog.find('[name="id"]').val(photoId);
+		editPhotoDialog.find('[name="title"]').val(photoTitle);
+		editPhotoDialog.find('[name="description"]').val(photoDescription);
+		
+		editPhotoDialog.modal('show');
+	});
+	
+	$('[data-action="toggle-sort"]').on('click', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		var target = $(this).is('[data-action="toggle-sort"]') ? $(this) : $(this).closest('[data-action="toggle-sort"]');
+		
+		var sortableTbody = $('#rows-table > tbody');
+		
+		if (target.hasClass('active')) {
+			
+			target.removeClass('active');
+			
+			target.html('<i class="glyphicon glyphicon-list"></i> Change Order');
+			
+			// destroy sortable functionallity
+			sortableTbody.sortable('destroy');
+			
+			// restore old html into tbody
+			sortableTbody.html(sortableTbody.data('oldHtml'));
+			
+			//hide "handle" for sorting, the icon in first column
+			sortableTbody.find('[data-action="sort"]').hide();
+			
+			//hide "Save Order" button
+			$('[data-action="save-order"]').hide();
+			
+		} else {
+			
+			target.addClass('active');
+			
+			//method html sets or gets html inside selected element
+			target.html('<i class="glyphicon glyphicon-remove"></i> Cancel');
+			
+			//save tbody html before sorting under key "oldHtml" into its data
+			sortableTbody.data('oldHtml', sortableTbody.html());
+			
+			//initialize sortable functionallity
+			sortableTbody.sortable({
+				handle: '[data-action="sort"]'
+			});
+			
+			//show "handle" for sorting, the icon in first column
+			sortableTbody.find('[data-action="sort"]').show();
+			
+			//show "Save Order" button
+			$('[data-action="save-order"]').show();
+		}
+	});
+	
+	$('[data-action="save-order"]').on('click', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		var photoSortedIds = $('#rows-table > tbody').sortable('toArray', {
+			attribute: 'data-photo-id'
+		});
+		
+		//select save order form
+		var saveOrderForm = $('#save-order-form');
+		
+		//find element with name "sorted_ids" in save order form and set its value
+		// with string in wich are sorted ids separated with coma (,)
+		// ex. "12,3,8,10,11,6,2,1,9,7,5,4"
+		saveOrderForm.find('[name="sorted_ids"]').val(photoSortedIds.join(','));
+		
+		// manually submit form by triggering "submit" event
+		saveOrderForm.trigger('submit');
+	});
+	
+	$('[data-action="add-photo"]').on('click', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		//select add photo dialog
+		var addPhotoDialog = $('#add-photo-dialog');
+		
+		addPhotoDialog.modal('show');
+	});
+	
+<?php $this->inlineScript()->captureEnd();?>
+</script>
