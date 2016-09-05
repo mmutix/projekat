@@ -1,0 +1,192 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 24, 2016, 4:01:20 PM
+    Author     : Ivan
+*/
+
+@media (min-width: 768px) {
+    .search span button{
+    
+    padding-left: 25px;
+    padding-right: 25px;
+}
+ .carousel-caption, .carousel-caption-right{
+        visibility: visible;
+    }
+    .carousel-indicators{
+    visibility: visible;
+}
+    .navbar-brand{
+        height: auto;
+        line-height: 50px;
+    }
+    .nav > li > a {
+    line-height: 60px;
+}
+.navbar-inverse .navbar-brand {
+    font-size: 16px;
+}
+a.navbar-brand {
+    padding-right: 0px;
+}
+.navbar-nav>li>a {
+    font-size: 11px;
+}
+ figure.newsItem{
+    padding: 15px;
+ }
+  figure div.hoverNews span{
+  
+     margin: 0 15px;
+ }
+ .controlsNews span{
+     display: inline-block;
+ }
+  .cuteParts .transparentColor .tuningCenter{
+     max-width: 100%;
+    float: right;
+ }
+  .cuteParts .transparentColor p{
+     margin-top: 50px;
+     margin-bottom: 130px;
+ }
+.newsPage  h3{
+    padding: 0 15px;
+    text-align: left;
+}
+
+.newsPage  figure.newsItem{
+    max-width: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid transparent;
+}
+section.aboutUs{
+    max-width: 100%;
+    margin: 0;
+}
+ 
+
+ .formWrapp {
+    top: 10%;
+    left: 20%;
+    right: 30%;
+}
+
+.information{
+    text-align: left;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+.portfolio figure{
+    max-width: 600px;
+}
+footer .payments{
+   
+    padding-top: 50px;
+}
+section.pumpRideAboutUs {
+    padding: 40px 0;
+}
+.productInfo #main_area{
+    max-width: 100%;
+}
+
+main.registration div.tab-content form#registratinForm select.form-control{
+    width: 90%;
+}
+
+main.registration div.tab-content form#registratinForm select.form-control + span{
+    right: 5%;
+}
+
+ 
+
+}
+@media (min-width: 992px) {
+    
+    .carousel-indicators li{
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+}
+.carousel-indicators .active{
+    border: 1px solid lightseagreen;
+    width: 60px;
+    height: 60px;
+    background-color: #0055a5;
+}
+ .header_top_in ul:last-of-type{
+    float: right;
+}
+.header_top_in ul{
+    padding-top: 30px;
+}
+.header_top_in ul{
+    float: left;
+}
+.header_top_in ul:first-of-type{
+    margin-right: 10px;
+}
+.navbar-inverse .navbar-brand {
+    font-size: 24px;
+}
+a.navbar-brand {
+    padding-right: 80px;
+}
+.navbar-nav>li>a {
+    font-size: 14px;
+}
+.search span button{
+    
+    padding-left: 55px;
+    padding-right: 55px;
+}
+ .formWrapp {
+    top: 10%;
+    left: 20%;
+    right: 40%;
+}
+#gmap_canvas{
+    max-height:800px;
+}
+.getPrice button{
+   
+    margin-top: 0;
+}
+aside.options > h2{
+    display: none;
+}
+.showOption{
+    display: block;
+}
+.portfolio figure{
+    max-width: 100%;
+}
+.portfolio figure img{
+    width:100%;
+    height:200px;
+    padding: 5px;
+}
+.portfolio figure img.double{
+    height:400px;
+}
+
+}
+
+
+@media (min-width: 1200px) {
+
+.header_top_in ul:first-of-type{
+    margin-right: 115px;
+}
+
+#gmap_canvas{
+    max-height:600px;
+}
+
+
+}

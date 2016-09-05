@@ -1,0 +1,12 @@
+.starrr {
+  display: inline-block; }
+  .starrr a {
+    font-size: 16px;
+    padding: 0 1px;
+    cursor: pointer;
+    color: #b4b4b4;;
+    text-decoration: none; }
+  
+  .starrr a.fa-cog-yellow {
+      color: #ffc000;
+  }

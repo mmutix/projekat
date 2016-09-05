@@ -1,0 +1,54 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 9, 2016, 11:41:29 AM
+    Author     : cubesschool6
+*/
+
+main.userPanel {
+    border-top: 4px solid black;
+    position: relative;
+    z-index: 10;
+    top: -40px;
+    padding-top: 45px;
+}
+main.userPanel .nav > li > a {
+    line-height: 30px;
+}
+main.userPanel .nav-pills > li.active > a,
+main.userPanel .nav-pills > li.active > a:focus,
+main.userPanel .nav-pills > li.active > a:hover {
+    background-color: #005db4;
+}
+main.userPanel figure{
+    width: 50px;
+    height: 50px;
+}
+main.userPanel h2{
+    font-weight: normal;
+    padding-bottom: 15px;
+}
+
+
+
+
+
+@media (min-width: 768px) {
+    
+ 
+
+}
+@media (min-width: 992px) {
+    
+
+}
+
+
+@media (min-width: 1200px) {
+
+
+
+}

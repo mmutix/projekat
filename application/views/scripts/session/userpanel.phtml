@@ -1,0 +1,83 @@
+<?php $this->headLink()->appendStylesheet("/front/css/userPanel.css") ?>
+<main class="userPanel">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li role="presentation" class="active" data-toggle="pill" ><a href="#myData" aria-controls="myData" role="tab" data-toggle="tab">My data</a></li>
+                            <li role="presentation" data-toggle="pill"><a href="#changeData" aria-controls="changeData" role="tab" data-toggle="tab">Data change</a></li>
+                            <li role="presentation" data-toggle="pill"><a href="#passwordChange" aria-controls="passwordChange" role="tab" data-toggle="tab">Change password</a></li>
+                            <li role="presentation" data-toggle="pill"><a href="#myMessage" aria-controls="myMessage" role="tab" data-toggle="tab">My message</a></li>
+                            <li role="presentation" data-toggle="pill"><a href="#myShopCart" aria-controls="myShopCart" role="tab" data-toggle="tab">My shop cart</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            <div class="tab-pane  active" id="myData">
+                                <h2>My Data</h2>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <figure class="center-block">
+                                            <img class="img-circle img-responsive"  src="/front/img/Blank-Person.jpg" alt=""/>
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p>Petar petrovic</p>
+                                        <p>Marssala Tita 3</p>
+                                        <p>063/123-123</p>
+                                        <p>064/123-123</p>
+                                        <p>14.08.1901</p>
+                                        <p><a href="mailto:someone@example.com">perapetrovic1901@exemple.com</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tab panel firm -->
+                            <div class="tab-pane fade" id="changeData">
+                                <h2>Change your data</h2>
+
+                            </div>
+                            <div class="tab-pane fade" id="passwordChange">
+                                <h2>Change your password</h2>
+                                
+                                
+                                
+                                
+                                <form id="resetUserPanel" class="form-horizontal" action="#" method="POST" >
+                                    <div class="form-group">
+                                        <label for="oldPassword" class="col-sm-3 control-label">Old Password</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="oldPassword" name="Old Password" placeholder="Password" data-validation="[NOTEMPTY]" data-validation-message="$ field is required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newPassword" class="col-sm-3 control-label">New Password</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="newPassword" placeholder="New Password" name="Password" data-validation="[NOTEMPTY]">
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="retypePassword" class="col-sm-3 control-label">Retype Password</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" id="retypePassword" placeholder="Retype Password" name="confirm password" data-validation="[V==Password]" data-validation-message="$ does not match the password" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                </div>
+                                </form>
+                                
+                                
+                                
+                            </div>
+                            <div class="tab-pane fade" id="myMessage">
+                                <h2>Messsage</h2>
+                            </div>
+                            <div class="tab-pane fade" id="myShopCart">
+                                <h2>Your purchases history</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</main>
