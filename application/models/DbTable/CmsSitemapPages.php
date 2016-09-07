@@ -14,7 +14,7 @@ class Application_Model_DbTable_CmsSitemapPages extends Zend_Db_Table_Abstract
 	 * @return array With keys as sitemap page ids and values as assoc. array with keys url and type
 	 */
 	public static function getSitemapPagesMap() {
-		//lazy loading
+		//lazy loading, ne povlace se resursi dok ne zatrebaju
 		
 		if (!self::$sitemapPagesMap) {
 			$sitemapPagesMap = array();

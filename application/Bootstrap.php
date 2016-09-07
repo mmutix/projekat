@@ -19,18 +19,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 'subtypes' => array(
                 )
             ),
-            'AboutUsPage' => array(
-                'title' => 'About Us Page',
-                'subtypes' => array(
-                )
-            ),
-            'ContactPage' => array(
-                'title' => 'Contact Page',
-                'subtypes' => array(
-                )
-            ),
             'CatalogPage' => array(
                 'title' => 'Catalog Page',
+                'subtypes' => array(
+                )
+            ),
+            'AboutUsPage' => array(
+                'title' => 'About Us Page',
                 'subtypes' => array(
                 )
             ),
@@ -40,14 +35,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     'NewsPage' => 0
                 )
             ),
+            'ContactPage' => array(
+                'title' => 'Contact Page',
+                'subtypes' => array(
+                )
+            ),
+
         );
 
         $rootSitemapPageTypes = array(
             'StaticPage' => 0,
             'PhotoGalleriesPage' => 1,
             'CatalogPage' => 1,
-            'NewsPage' => 1,
             'AboutUsPage' => 1,
+            'NewsPage' => 1,
             'ContactPage' => 1,
         );
 

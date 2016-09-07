@@ -23,7 +23,7 @@ class Zend_View_Helper_TopMenuHtml extends Zend_View_Helper_Abstract {
         ?>
 
         <ul class="nav navbar-nav" id="main-menu">
-            <li>
+            <li class="active">
                 <a href="<?php echo $this->view->baseUrl('/'); ?>">Home</a>
             </li>
         <?php foreach ($topMenuSitemapPages as $sitemapPage) { ?>
