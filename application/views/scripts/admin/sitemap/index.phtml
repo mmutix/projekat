@@ -206,6 +206,27 @@ $sitemapPageTypes = Zend_Registry::get('sitemapPageTypes');
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </form><!-- /.modal -->
+<!-- /.modal-ENABLE -->
+
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_sitemap', 'action' => 'enable'), 'default', true); ?>" id="enable-warning-dialog" class="modal fade" tabindex="-1" role="dialog">
+    <input type="hidden" name="task" value="enable">
+    <input type="hidden" name="id" value="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Enable sitemap page</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to enable sitemap page? <span class="sitemap333" class="btn btn-tumblr"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Enable</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
 
 <form method="post" action="<?php echo $this->url(array('controller' => 'admin_sitemap', 'action' => 'updateorder', 'parent_id' => $this->currentSitemapPageId), 'default', true);?>" style="display: none;" id="save-order-form">
 	<input type="hidden" name="task" value="saveOrder">
@@ -259,7 +280,22 @@ $this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/jquery
 		
 		$('#disable-warning-dialog').modal('show');
 	});
-	
+	// Enable
+    $('#rows-table').on('click', '[data-action="enable"]', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        //calculate target element
+        var target = $(this).is('[data-action="enable"]') ? $(this) : $(this).closest('[data-action="enable"]');
+        //get any attribute
+        var sitemapPageId = target.attr('data-sitemap-page-id');
+        //get data- attributes
+        //var sitemapPageId = target.data('sitemapPageId');
+        //set value for input field with name "id"
+        $('#enable-warning-dialog').find('[name="id"]').val(sitemapPageId);
+        $('#enable-warning-dialog').modal('show');
+
+    });
+        
 	$('[data-action="toggle-sort"]').on('click', function(e) {
 		
 		e.preventDefault();

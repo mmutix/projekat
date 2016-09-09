@@ -35,7 +35,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     'NewsPage' => 0
                 )
             ),
-            'ContactUsPage' => array(
+            'ContactPage' => array(
                 'title' => 'Contact Us Page',
                 'subtypes' => array(
                 )

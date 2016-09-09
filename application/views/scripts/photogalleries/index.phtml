@@ -1,5 +1,42 @@
 <?php
-
-$this->headTitle($this->sitemapPage['title']);
-$this->headMeta()->appendName('description', $this->sitemapPage['description']);
+$photoGalleries = $this->photoGalleries;
+$sitemapPage = $this->sitemapPage;
+$this->headTitle($sitemapPage['title']);
+$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
+
+<div id="highlighted">
+    <div class="container">
+        <div class="header">
+            <h2 class="page-title">
+                <span><?php echo $this->escape($sitemapPage['title']); ?></span>
+                <small><?php echo $this->escape($sitemapPage['title']); ?></small>
+            </h2>
+        </div>
+    </div>
+</div>
+<div id="content">
+
+    <div class="container portfolio">
+        <!--Portfolio items-->
+        <ul class="thumbnails row block projects" id="quicksand">
+            <?php foreach ($photoGalleries as $photoGallery) { ?>
+                <li class="col-md-4 print" data-id="1" data-type="print">
+                    <div class="">
+                        <div class="project">
+                            <a class="lnk-polaroid" href="<?php echo $this->photoGalleryUrl($photoGallery); ?>">
+                                <img src="<?php echo $this->photoGalleryLeadingPhotoUrl($photoGallery); ?>" alt="<?php echo $this->escape($photoGallery['title']); ?>" class="img-polaroid img-responsive" />
+                            </a>
+                            <h3 class="title">
+                                <a href="<?php echo $this->photoGalleryUrl($photoGallery); ?>"><?php echo $this->escape($photoGallery['title']); ?></a>
+                            </h3>
+                            <p class="muted"><?php echo $this->escape($photoGallery['description']); ?></p>
+                        </div>
+                    </div>
+                </li>
+            <?php } ?>
+
+        </ul>
+    </div>
+
+</div>
