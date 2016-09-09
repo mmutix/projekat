@@ -19,8 +19,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 'subtypes' => array(
                 )
             ),
-            'CatalogPage' => array(
-                'title' => 'Catalog Page',
+            'CataloguePage' => array(
+                'title' => 'Catalogue Page',
                 'subtypes' => array(
                 )
             ),
@@ -35,8 +35,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     'NewsPage' => 0
                 )
             ),
-            'ContactPage' => array(
-                'title' => 'Contact Page',
+            'ContactUsPage' => array(
+                'title' => 'Contact Us Page',
                 'subtypes' => array(
                 )
             ),
@@ -46,7 +46,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $rootSitemapPageTypes = array(
             'StaticPage' => 0,
             'PhotoGalleriesPage' => 1,
-            'CatalogPage' => 1,
+            'CataloguePage' => 1,
             'AboutUsPage' => 1,
             'NewsPage' => 1,
             'ContactPage' => 1,
@@ -112,17 +112,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         )
                 ));
             }
-            if ($sitemapPageMap['type'] == 'CatalogPage') {
+            if ($sitemapPageMap['type'] == 'CataloguePage') {
                 $router->addRoute('static-page-route-' . $sitemapPageId, new Zend_Controller_Router_Route_Static(
                         $sitemapPageMap['url'], array(
-                    'controller' => 'catalog',
+                    'controller' => 'catalogue',
                     'action' => 'index',
                     'sitemap_page_id' => $sitemapPageId
                         )
                 ));
                 $router->addRoute('product-item-route', new Zend_Controller_Router_Route(
                         $sitemapPageMap['url'] . '/:id/:product_item_slug', array(
-                    'controller' => 'catalog',
+                    'controller' => 'catalogue',
                     'action' => 'products',
                     'sitemap_page_id' => $sitemapPageId
                         )
@@ -138,7 +138,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ));
                 $router->addRoute('news-item-route', new Zend_Controller_Router_Route(
                         $sitemapPageMap['url'] . '/:id/:news_item_slug', array(
-                    'controller' => 'catalog',
+                    'controller' => 'catalogue',
                     'action' => 'newsItem',
                     'sitemap_page_id' => $sitemapPageId
                         )

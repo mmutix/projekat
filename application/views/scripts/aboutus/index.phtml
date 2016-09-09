@@ -1,206 +1,26 @@
+
 <?php
 $sitemapPage = $this->sitemapPage;
 $this->headTitle($sitemapPage['title']);
+$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
 
-<section class="bredcrumbs">
-
+<main>
     <div class="container">
+
         <article>
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="<?php echo $this->baseUrl('/'); ?>">Home</a></li>
+                <?php foreach ($this->breadcrumb as $breadcrumb) { ?>
+                    <li><a href=""><?php echo $breadcrumb['short_title']; ?></a></li>
+                <?php } ?>
             </ol>
         </article>
+        <div class="header-a">
+            <?php echo $this->escape($sitemapPage['title']); ?>
+        </div>
+        <p>
+            <?php echo $sitemapPage['body']; ?>
+        </p>
     </div>
-</section>
-<main>
-
-
-    <section class="aboutUs">
-        <div class="container">
-            <h3>About Us</h3>
-            <div class="row">
-                <div class="col-md-6 center-block">
-                    <figure>
-                        <img class="img-responsive" src="img/about_us.jpg" alt="">
-                    </figure>
-                </div>
-                <div class="col-md-6 center-block">
-                    <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius. Vis quis lobortis dissentias ex, 
-                        in du aft philosophia, malis necessitatibus no mei. Volumus sensibus qui ex, eum duis doming ad. 
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elitgula eget dolor.</p>
-                    <p>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, 
-                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, 
-                        pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                        vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-                        felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. 
-                        Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. 
-                        Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. 
-                        Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="getPrice">
-        <div class="container">
-            <div class="col-md-10 text-center">
-                <h2>You want to know what else can our team? Well, download and see</h2>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-default" type="button">Get Price</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="aboutUs  aboutUsPadding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 center-block">
-                    <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                        Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                        Volumus sensibus qui ex, eum duis doming ad. Lorem ipsum dolor sit amet, 
-                        consectetuer adipiscing elit. Ligula eget dolor.</p>
-                    <p>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus: </p>
-                    <ul>
-                        <li>quam felis</li>
-                        <li>ultricies nec</li>
-                        <li>pellentesque eu</li>
-                        <li>pretium quis </li>
-                        <li>sem</li>
-                    </ul>
-                    <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-                        arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. </p>
-                </div>
-                <div class="col-md-6 center-block">
-                    <figure>
-                        <img class="img-responsive" src="img/about_us1.jpg" alt="">
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="pumpRideAboutUs text-center">
-        <h3>Pump your ride</h3>
-    </section>
-    <section class="pumpOptions">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="img/devices_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="img/chip_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="img/sock_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="img/wheels_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="getPrice">
-        <div class="container">
-            <div class="col-md-10 text-center">
-                <h2>You want to know what else can our team? Well, download and see</h2>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-default" type="button">Get Price</button>
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="information">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-6">
-                    <h3>Catalog</h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p><a href="">Interior</a></p>
-                            <p><a href="">Exterior</a></p>
-                            <p><a href="">Performance</a></p>
-                            <p><a href="">Lighting</a></p>
-                        </div>
-                        <div class="col-md-4">
-                            <p><a href="">Wheels & Tires</a></p>
-                            <p><a href="">Audio</a></p>
-                            <p><a href="">Repair Parts</a></p>
-                            <p><a href="">Body Parts</a></p>
-                        </div>
-                        <div class="col-md-4">
-                            <p><a href="">RV Parts</a></p>
-                            <p><a href="">Tools & Garage</a></p>
-                            <p><a href="">Outdoor</a></p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class=" col-md-3">
-                    <h3>Delivery Information</h3>
-                    <p><a href="">Delivery Information</a></p>
-                    <p><a href="">Privacy policy</a></p>
-                    <p><a href="">Terms & Condition</a></p>
-                    <p><a href="">Contact us</a></p>
-
-                </div>
-                <div class=" col-md-3">
-                    <h3>Our service</h3>
-                    <p><a href="">My Account</a></p>
-                    <p><a href="">Returns</a></p>
-                    <p><a href="">Site map</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
-

@@ -61,7 +61,7 @@ $user = Zend_Auth::getInstance()->getIdentity();
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-						<li><a href="#">Signed in as <strong><?php echo $this->escape($user['username']);?></strong></a></li>
+                        <li><a href="#">Signed in as <strong><?php echo $this->escape($user['username']);?></strong></a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo $this->url(array('controller' => 'admin_profile', 'action' => 'edit'), 'default', true);?>"><i class="fa fa-user fa-fw"></i> Edit Profile</a>
                         </li>
@@ -97,9 +97,12 @@ $user = Zend_Auth::getInstance()->getIdentity();
                         </li>
                          <li>
                             <a href="<?php echo $this->url(array('controller' => 'admin_products'), 'default', true);?>"><i class="fa fa-car"></i> Products</a>
-</li>
+                        </li>
 						<li>
                             <a href="<?php echo $this->url(array('controller' => 'admin_users'), 'default', true);?>"><i class="fa fa-user fa-fw"></i> Users</a>
+                        </li>
+                                               <li>
+                            <a href="<?php echo $this->url(array('controller' => 'admin_news'), 'default', true);?>"><i class="fa fa-newspaper-o fa-fw"></i> News</a>
                         </li>
                     </ul>
                 </div>

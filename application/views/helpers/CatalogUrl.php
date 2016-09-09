@@ -1,13 +1,22 @@
 <?php
 
-class Zend_View_Helper_CatalogUrl extends Zend_View_Helper_Abstract {
+class Zend_View_Helper_CatalogueUrl extends Zend_View_Helper_Abstract {
 
-    public function catalogUrl($catalog) {
+    public function catalogueUrl($catalogue) {
 
         return $this->view->url(array(
-                    'id' => $catalog['id'],
-                    'catalog_slug' => $catalog['title']
-                        ), 'catalog-route', true);
+                    'id' => $catalogue['id'],
+                    'catalogue_slug' => $catalogue['title']
+                        ), 'catalogue-route', true);
     }
-
+    public function productItemUrl($productItem) {
+        
+        return $this->view->url(array(
+            'id' => $productItem['id'],
+            'product_item_slug' => $productItem['title']
+            
+        ), 'product-item-route', true);
+        
+    }
+    
 }

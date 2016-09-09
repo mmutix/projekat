@@ -35,9 +35,9 @@ class Zend_View_Helper_TopMenuHtml extends Zend_View_Helper_Abstract {
             <?php }
             ?>     
 
-            <li>
-                <a href="<?php echo $this->view->baseUrl('/admin_session/login'); ?>"><i class="fa fa-user"></i> Login</a>
-            </li> 
+<!--            <li>
+                <a href="//<?php echo $this->view->baseUrl('/admin_session/login'); ?>"><i class="fa fa-user"></i> Login</a>
+            </li> -->
         </ul>  
 
         <?php
