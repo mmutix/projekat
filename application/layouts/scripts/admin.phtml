@@ -98,7 +98,10 @@ $user = Zend_Auth::getInstance()->getIdentity();
                          <li>
                             <a href="<?php echo $this->url(array('controller' => 'admin_products'), 'default', true);?>"><i class="fa fa-car"></i> Products</a>
                         </li>
-						<li>
+                        <li>
+                            <a href="<?php echo $this->url(array('controller' => 'admin_services'), 'default', true);?>"><i class="fa fa-cog fa-fw"></i> Services</a>
+                        </li>
+                        <li>
                             <a href="<?php echo $this->url(array('controller' => 'admin_users'), 'default', true);?>"><i class="fa fa-user fa-fw"></i> Users</a>
                         </li>
                                                <li>

@@ -1,12 +1,9 @@
 <?php
-class NewsController extends Zend_Controller_Action
-{
-    public function init()
-    {
+class ServicesController extends Zend_Controller_Action {
+    public function init() {
         /* Initialize action controller here */
     }
-    public function indexAction()
- {
+    public function indexAction() {
         $request = $this->getRequest();
         $sitemapPageId = (int) $request->getParam('sitemap_page_id');
         if ($sitemapPageId <= 0) {
@@ -26,24 +23,22 @@ class NewsController extends Zend_Controller_Action
         ) {
             throw new Zend_Controller_Router_Exception('Sitemap page is disabled', 404);
         }
-        $cmsNewsDbTable = new Application_Model_DbTable_CmsNews();
-        $news = $cmsNewsDbTable->search(array(
+        $cmsServicesDbTable = new Application_Model_DbTable_CmsServices();
+        $services = $cmsServicesDbTable->search(array(
             'filters' => array(
-                'status' => Application_Model_DbTable_CmsNews::STATUS_ENABLED
+                'status' => Application_Model_DbTable_CmsServices::STATUS_ENABLED
             ),
             'orders' => array(
                 'order_number' => 'ASC'
             ),
-            'limit' => 9
+            'limit' => 3
         ));
         $sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
-        
-        $this->view->sitemapPage = $sitemapPage;
         $this->view->breadcrumb = $sitemapPageBreadcrumbs;
-        $this->view->news = $news;
+        $this->view->sitemapPage = $sitemapPage;
+        $this->view->services = $services;
     }
-    public function newsAction()
-    {
-        
+    public function serviceAction() {
+        /* Initialize action controller here */
     }
 }

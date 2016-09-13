@@ -1,151 +1,49 @@
 <?php
 $sitemapPage = $this->sitemapPage;
+$news = $this->news;
 $this->headTitle($sitemapPage['title']);
 //$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
 
-<section class="bredcrumbs">
-
-    <div class="container">
-        <article>
-            <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">News</a></li>
-            </ol>
-        </article>
-    </div>
-</section>
+<div class="container">
+    <article>
+        <ol class="breadcrumb">
+            <li><a href="<?php echo $this->baseUrl('/'); ?>">Home</a></li>
+            <?php foreach ($this->breadcrumb as $breadcrumb) { ?>
+                <li><a href=""><?php echo $breadcrumb['short_title']; ?></a></li>
+            <?php } ?>
+        </ol>
+    </article>
+</div>       
 <main>
     <section class="news newsPage">
         <div class="container">
-            <h3>NEWS</h3>
             <div class="row">
+                <?php foreach ($news as $singleNews) {
+                    ?>
+                    <div class="col-sm-6 col-md-4">
+                        <figure class="newsItem">
+                            <div class="imgNews">
+                                <img class="img-responsive" src="<?php echo $this->newsImgUrl($singleNews); ?>" alt=""/>
+                                <div class="hoverNews text-center">
+                                    <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                                    <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+                                    <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn items date"><?php echo $this->escape($singleNews['date']); ?></button>
+                            <button type="button" class="btn items article"> View Article <?php echo $this->escape($singleNews['title']); ?></button>
+                            <br>
+                            <p><span><?php echo $this->escape($singleNews['description']); ?>
+                                </span></p>
 
 
-                <div class="col-sm-6 col-md-4">
-                    <figure class="newsItem">
-                        <div class="imgNews">
-                            <img class="img-responsive" src="/front/img/news_car.jpg" alt=""/>
-                            <div class="hoverNews text-center">
-                                <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </div>
-                        </div>
-
-                        <figcaption>
-                            <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                            <button type="button" class="btn items">25 April 2015</button>
-                            <button type="button" class="btn items">Add comment</button>
-                            <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                Volumus sensibus qui ex, eum duis doming ad.</p>
-
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <figure class="newsItem">
-                        <div class="imgNews">
-                            <img class="img-responsive" src="/front/img/news_car1.jpg" alt=""/>
-                            <div class="hoverNews text-center">
-                                <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </div>
-                        </div>
-                        <figcaption>
-                            <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                            <button type="button" class="btn items">25 April 2015</button>
-                            <button type="button" class="btn items">Add comment</button>
-                            <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                Volumus sensibus qui ex, eum duis doming ad.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <figure class="newsItem">
-                        <div class="imgNews">
-                            <img class="img-responsive" src="/front/img/news_car1.jpg" alt=""/>
-                            <div class="hoverNews text-center">
-                                <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </div>
-                        </div>
-                        <figcaption>
-                            <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                            <button type="button" class="btn items">25 April 2015</button>
-                            <button type="button" class="btn items">Add comment</button>
-                            <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                Volumus sensibus qui ex, eum duis doming ad.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <figure class="newsItem">
-                        <div class="imgNews">
-                            <img class="img-responsive" src="/front/img/news_car.jpg" alt=""/>
-                            <div class="hoverNews text-center">
-                                <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </div>
-                        </div>
-                        <figcaption>
-                            <a href="#"> <h4>READY FOR TRACK DAY</h4></a>
-                            <button type="button" class="btn items">25 April 2015</button>
-                            <button type="button" class="btn items">Add comment</button>
-                            <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                Volumus sensibus qui ex, eum duis doming ad.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <figure class="newsItem">
-                        <div class="imgNews">
-                            <img class="img-responsive" src="/front/img/news_car1.jpg" alt=""/>
-                            <div class="hoverNews text-center">
-                                <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </div>
-                        </div>
-                        <figcaption>
-                            <a href="#"> <h4>READY FOR TRACK DAY</h4></a>
-                            <button type="button" class="btn items">25 April 2015</button>
-                            <button type="button" class="btn items">Add comment</button>
-                            <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                Volumus sensibus qui ex, eum duis doming ad.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <figure class="newsItem">
-                        <div class="imgNews">
-                            <img class="img-responsive" src="/front/img/news_car.jpg" alt=""/>
-                            <div class="hoverNews text-center">
-                                <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                            </div>
-                        </div>
-                        <figcaption>
-                            <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                            <button type="button" class="btn items">25 April 2015</button>
-                            <button type="button" class="btn items">Add comment</button>
-                            <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem</p>
-                        </figcaption>
-                    </figure>
-                </div>
-
-
+                        </figure>
+                    </div>
+                <?php }
+                ?>
             </div>
         </div>
     </section>
-
 </main>
