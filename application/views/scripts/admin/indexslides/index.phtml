@@ -48,7 +48,7 @@ $this->headTitle('Index Slider');
 							<th>Title</th>
 							<th>Link Type</th>
 							<th>Link</th>
-							<th class="text-center">#</th>
+							<th class="text-center">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -166,6 +166,26 @@ $this->headTitle('Index Slider');
   </div><!-- /.modal-dialog -->
 </form><!-- /.modal -->
 
+<form method="post" action="<?php echo $this->url(array('controller' => 'admin_indexslides', 'action' => 'enable'), 'default', true);?>" id="enable-warning-dialog" class="modal fade" tabindex="-1" role="dialog">
+	<input type="hidden" name="task" value="enable">
+	<input type="hidden" name="id" value="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Enable indexSlide</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to disable indexSlide?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-remove"></i> Enable</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</form><!-- /.modal -->
+
 <form method="post" action="<?php echo $this->url(array('controller' => 'admin_indexslides', 'action' => 'updateorder'), 'default', true);?>" style="display: none;" id="save-order-form">
 	<input type="hidden" name="task" value="saveOrder">
 	<input type="hidden" name="sorted_ids" value="">
@@ -217,6 +237,27 @@ $this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/jquery
 		$('#disable-warning-dialog').find('[name="id"]').val(indexSlideId);
 		
 		$('#disable-warning-dialog').modal('show');
+	});
+        //enable
+        $('#rows-table').on('click', '[data-action="enable"]', function(e) {
+		
+		e.preventDefault();
+		e.stopPropagation();
+		
+		//calculate target element
+		var target = $(this).is('[data-action="enable"]') ? $(this) : $(this).closest('[data-action="enable"]');
+		
+		//get any attribute
+		var indexSlideId = target.attr('data-index-slide-id');
+		
+		//get data- attributes
+		//var photoGalleryId = target.data('photoGalleryId');
+		
+		
+		//set value for input field with name "id"
+		$('#enable-warning-dialog').find('[name="id"]').val(indexSlideId);
+		
+		$('#enable-warning-dialog').modal('show');
 	});
 	
 	$('[data-action="toggle-sort"]').on('click', function(e) {

@@ -2,7 +2,7 @@
 $this->headTitle('News - Add News');
 
 $form = $this->form;
-$form->setElementDecorators(array('ViewHelper'));
+$form->setElementDecorators(array ('ViewHelper'));
 ?>
 <div class="page-header">
     <h1>News <small>Add News</small></h1>
@@ -18,7 +18,7 @@ $form->setElementDecorators(array('ViewHelper'));
             <div class="panel-heading text-right">
                 <div class="btn-group" role="group" aria-label="...">
                     <a 
-                        href="<?php echo $this->url(array('controller' => 'admin_users', 'action' => 'index'), 'default', true); ?>"
+                        href="<?php echo $this->url(array('controller' => 'admin_news', 'action' => 'index'), 'default', true); ?>"
                         class="btn btn-default"
                         ><i class="glyphicon glyphicon-arrow-left"></i> Back to all news</a>
                 </div>

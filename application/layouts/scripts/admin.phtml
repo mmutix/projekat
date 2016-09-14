@@ -102,9 +102,12 @@ $user = Zend_Auth::getInstance()->getIdentity();
                             <a href="<?php echo $this->url(array('controller' => 'admin_services'), 'default', true);?>"><i class="fa fa-cog fa-fw"></i> Services</a>
                         </li>
                         <li>
+                            <a href="<?php echo $this->url(array('controller' => 'admin_clients'), 'default', true);?>"><i class="fa fa-users fa-fw"></i> Clients</a>
+                        </li>
+                        <li>
                             <a href="<?php echo $this->url(array('controller' => 'admin_users'), 'default', true);?>"><i class="fa fa-user fa-fw"></i> Users</a>
                         </li>
-                                               <li>
+                        <li>
                             <a href="<?php echo $this->url(array('controller' => 'admin_news'), 'default', true);?>"><i class="fa fa-newspaper-o fa-fw"></i> News</a>
                         </li>
                     </ul>
