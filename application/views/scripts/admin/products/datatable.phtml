@@ -1,0 +1,78 @@
+<?php
+$datatableJson = array(
+    'draw' => $this->draw,
+    'recordsTotal' => $this->productsTotal,
+    'recordsFiltered' => $this->productsFilteredCount,
+    'data' => array()
+);
+foreach ($this->products as $product) {
+
+    $row = array();
+
+    $row['DT_RowData'] = array(
+        'product-id' => $product['id']
+    );
+
+    $row['DT_RowAttr'] = array(
+        'data-product-id' => $product['id'],
+        'model' => $product['model']
+    );
+
+    if ($product['stock_status'] == Application_Model_DbTable_CmsProducts::STATUS_DISABLED) {
+
+        $row['DT_RowClass'] = 'danger';
+    }
+
+    foreach ($this->columns as $columnName) {
+
+        if ($columnName == 'stock_status') {
+
+            if ($product['stock_status'] == Application_Model_DbTable_CmsProducts::STATUS_ENABLED) {
+                $row[] = '<span class="badge alert-success" title="enabled"><i class="glyphicon glyphicon-ok"></i></span>';
+            } else {
+                $row[] = '<span class="badge alert-danger" title="disabled"><i class="glyphicon glyphicon-remove"></i></span>';
+            }
+        } else if ($columnName == 'actions') {
+
+            $this->placeholder('actions')->exchangeArray(array());
+
+            $this->placeholder('actions')->captureStart();
+
+            if ($product['stock_status'] == Application_Model_DbTable_CmsProducts::STATUS_DISABLED) {
+                ?>
+                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                    <a 
+                        href="<?php echo $this->url(array('controller' => 'admin_products', 'action' => 'edit', 'id' => $product['id']), 'default', true); ?>"
+                        type="button" class="btn btn-default" title="edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <button data-product-id="<?php echo $this->escape($product['id']); ?>" data-action="enable" type="button" class="btn btn-default" title="enable"><i class="glyphicon glyphicon-ok"></i></button>
+                    <button data-product-id="<?php echo $this->escape($product['id']); ?>" data-action="delete" type="button" class="btn btn-default" title="delete"><i class="glyphicon glyphicon-trash"></i></button>
+
+
+                </div>
+                <?php
+            } else {
+                ?>
+                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                    <a 
+                        href="<?php echo $this->url(array('controller' => 'admin_products', 'action' => 'edit', 'id' => $product['id']), 'default', true); ?>"
+                        type="button" class="btn btn-default" title="edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <button data-product-id="<?php echo $this->escape($product['id']); ?>" data-action="disable" type="button" class="btn btn-default" title="disabled"><i class="glyphicon glyphicon-remove"></i></button>
+                    <button data-product-id="<?php echo $this->escape($product['id']); ?>" data-action="delete" type="button" class="btn btn-default" title="delete"><i class="glyphicon glyphicon-trash"></i></button>
+
+
+                </div>
+                <?php
+            }
+
+            $this->placeholder('actions')->captureEnd();
+
+            $row[] = $this->placeholder('actions')->toString();
+        } else {
+            $row[] = $product[$columnName];
+        }
+    }
+
+    $datatableJson['data'][] = $row;
+}
+//send JSON from view script (disables layout, and set the Content-Type header to application/json)
+echo $this->json($datatableJson);

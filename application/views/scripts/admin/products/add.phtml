@@ -1,0 +1,193 @@
+<?php
+$this->headTitle('Products - New Product');
+$form = $this->form;
+$form->setElementDecorators(array('ViewHelper')); 
+?>
+<div class="page-header">
+    <h1>Products <small>New Product</small></h1>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php echo $this->systemMessagesHtml($this->systemMessages); ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12"> 
+        <div class="panel panel-default">
+            <div class="panel-heading text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a 
+                        href='<?php echo $this->url(array('controller' => 'admin_products', 'action' => 'index'), 'default', true) ?>' 
+                        class="btn btn-default"
+                        ><i class="glyphicon glyphicon-arrow-left"></i>Back to all products</a>
+
+                </div></div>
+            <div class="panel-body">
+                <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
+                    <input type="hidden" name="task" value="save">
+                    <fieldset>
+
+                        <!-- Form Name -->
+                        <legend>New Product</legend>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="model">Model</label>  
+                            <div class="col-md-4">
+                                <?php
+                                echo $form->getElement('model')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'enter product\'s model',
+                                    'id' => 'model',
+                                    'required' => 'required'
+                                ));
+                                ?>
+                                <span class="help-block">min 3 max 20 characters</span>  
+                            </div>
+                            <div class="col-md-4">
+                                <?php if ($form->getElement('model')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('model')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?> 
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="type">Part Type</label>  
+                            <div class="col-md-4">
+                                <?php
+                                echo $form->getElement('type')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'enter product\'s type',
+                                    'id' => 'type',
+                                    'required' => 'required'
+                                ));
+                                ?>
+
+                                <span class="help-block">min 3 max 20 characters</span>  
+                            </div>
+                            <div class="col-md-4">
+                                <?php if ($form->getElement('type')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('type')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <!-- Text Area input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="description">Description</label>  
+                            <div class="col-md-4">
+                                <?php
+                                echo $form->getElement('description')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'enter product\'s description',
+                                    'id' => 'description',
+                                    'rows' => 5
+                                ));
+                                ?>
+
+                                <span class="help-block">min 3 max 255 characters</span>  
+                            </div>
+                            <div class="col-md-4">
+                                <?php if ($form->getElement('description')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('description')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="price">Price</label>  
+                            <div class="col-md-4">
+                                <?php
+                                echo $form->getElement('price')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'enter product\'s price',
+                                    'id' => 'price',
+                                    'required' => 'required'
+                                ));
+                                ?>
+
+                                <span class="help-block">0.00</span>  
+                            </div>
+                            <div class="col-md-4">
+                                <?php if ($form->getElement('price')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('price')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="quantity">Quantity</label>  
+                            <div class="col-md-4">
+                                <?php
+                                echo $form->getElement('quantity')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'enter product\'s quantity',
+                                    'id' => 'quantity'
+                                ));
+                                ?>
+
+                                <span class="help-block">0</span>  
+                            </div>
+                            <div class="col-md-4">
+                                <?php if ($form->getElement('quantity')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('quantity')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="product_photo">Photo</label>
+                            <div class="col-md-4">                     
+                                <input type="file" name="product_photo" id="product_photo" class="form-control input-md">
+                            </div>
+                            <div class="col-md-4">
+                                <?php if ($form->getElement('product_photo')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('product_photo')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>  
+                            </div>
+                        </div>
+
+                        <!-- Button (Double) -->
+                        <div class="form-group text-right">
+                            <label class="col-md-4 control-label" for="new_product_cancel"></label>
+                            <div class="col-md-8">
+                                <a href="<?php echo $this->url(array('controller' => 'admin_products', 'action' => 'index'), 'default', true); ?>" id="new_product_cancel" name="new_product_cancel" class="btn btn-default">Cancel</a>
+                                <button type="submit" id="new_product_submit" name="new_product_submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

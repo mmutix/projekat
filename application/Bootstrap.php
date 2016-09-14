@@ -42,7 +42,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             ),
             'ServicesPage'=>array(
                  'title' => 'Services Page',
-                  'subtypes' => array(
+                 'subtypes' => array(
                     )
             ),
         );
