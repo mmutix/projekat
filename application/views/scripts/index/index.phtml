@@ -7,52 +7,33 @@ $servicesSitemapPage = $this->servicesSitemapPage;
 $this->headTitle($sitemapPage['title']);
 //$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
-<article class="container-fluid slide_carusel">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6000" data-pause="hover">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <article class="container-fluid slide_carusel">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6000" data-pause="hover">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <?php for ($carouselSlide = 0; $carouselSlide < count($this->indexSlides); $carouselSlide++) { ?>
+                        <li 
+                            data-target="#carousel-example-generic" 
+                            data-slide-to="<?php echo $carouselSlide; ?>" <?php echo $carouselSlide == 0 ? "class=\"active\"" : ''; ?>>
+                        </li>
+                    <?php } ?>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img class="img-responsive" src="front/img/index_slider.jpg" alt=""/>
-                <div class="carousel-caption">
-                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    <h2>Gear</h2><br>
-                    <p>automotive psd template</p>
-                </div>
-                <div class="carousel-caption-right">
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                </div>
-            </div>
-            <div class="item">
-                <img class="img-responsive" src="front/img/index_slider1.jpg" alt=""/>
-                <div class="carousel-caption">
-                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    <h2>Gear</h2><br>
-                    <p>automotive psd template</p>
+            <?php $carouselInner=0; foreach ($this->indexSlides as $indexSlide) { ?>
+            <div class="item <?php echo $carouselInner == 0 ? "active" : "" ; $carouselInner++;?>">
+                <img class="img-responsive" src="<?php echo $this->indexSlideImgUrl($indexSlide);?>" alt="" />
 
-                </div>
-                <div class="carousel-caption-right">
-                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                </div>
-            </div>
-            <div class="item">
-                <img class="img-responsive" src="front/img/index_slider2.jpg" alt=""/>
                 <div class="carousel-caption">
                     <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                    <h2>Gear</h2><br>
-                    <p>automotive psd template</p>
+                    <h2><?php echo $this->escape($indexSlide['title']);?></h2>
                 </div>
                 <div class="carousel-caption-right">
                     <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                 </div>
-            </div>
         </div>
+            <?php }?>
 
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -348,147 +329,53 @@ $this->headTitle($sitemapPage['title']);
             </div>
         </div>
     </section>
+    
+    
     <section class="news">
         <div class="container">
-            <h3 class="text-center">NEWS</h3>
+            <div class="container">
+            <h3 class="text-center">NEWS <br><?php if ($this->newsSitemapPage) {?>
+		<small><a href="<?php echo $this->sitemapPageUrl($this->newsSitemapPage['id']);?>">View all</a></small>
+            <?php }?></h3>
+            
             <div class="row">
                 <div class="col-xs-10">
                     <div class="slider"><!-- The slider -->
-                        <div><!-- A mandatory div used by the slider -->
+                        <div>
+                             <?php foreach ($news as $singleNews) {
+                             ?>
+                            <!-- A mandatory div used by the slider -->
                             <!-- Each div below is considered a slide -->
                             <div>
                                 <figure class="newsItem">
                                     <div class="imgNews">
-                                        <img class="img-responsive" src="front/img/news_car.jpg" alt=""/>
+                                        <img class="img-responsive" src="<?php echo $this->newsImgUrl($singleNews);?>" alt=""/>
                                         <div class="hoverNews text-center">
-                                            <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+                                            <a href="https://www.facebook.com/cubesdoo"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                                            <a href="https://plus.google.com/117073708024696030123/about"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+                                            <a href="https://twitter.com/cubesdoo"><span class="fa fa-twitter" aria-hidden="true"></span></a>
                                         </div>
                                     </div>
 
                                     <figcaption>
-                                        <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                                        <button type="button" class="btn items">25 April 2015</button>
-                                        <button type="button" class="btn items">Add comment</button>
-                                        <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                            Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                            Volumus sensibus qui ex, eum duis doming ad.</p>
+                                        <a href="#"><h4><?php echo $this->escape($singleNews['title']); ?></h4></a>
+                                        <button type="button" class="btn items"><?php echo $this->escape($singleNews['date']); ?></button>
+                                        <button type="button" class="btn items">Read More</button>
+                                        <p><?php echo $this->escape($singleNews['description']); ?></p>
 
                                     </figcaption>
                                 </figure>
                             </div>
-                            <div>
-                                <figure class="newsItem">
-                                    <div class="imgNews">
-                                        <img class="img-responsive" src="front/img/news_car.jpg" alt=""/>
-                                        <div class="hoverNews text-center">
-                                            <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                    <figcaption>
-                                        <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                                        <button type="button" class="btn items">25 April 2015</button>
-                                        <button type="button" class="btn items">Add comment</button>
-                                        <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                            Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                            Volumus sensibus qui ex, eum duis doming ad.</p>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div>
-                                <figure class="newsItem">
-                                    <div class="imgNews">
-                                        <img class="img-responsive" src="front/img/news_car1.jpg" alt=""/>
-                                        <div class="hoverNews text-center">
-                                            <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                    <figcaption>
-                                        <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                                        <button type="button" class="btn items">25 April 2015</button>
-                                        <button type="button" class="btn items">Add comment</button>
-                                        <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                            Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                            Volumus sensibus qui ex, eum duis doming ad.</p>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div>
-                                <figure class="newsItem">
-                                    <div class="imgNews">
-                                        <img class="img-responsive" src="front/img/news_car.jpg" alt=""/>
-                                        <div class="hoverNews text-center">
-                                            <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                    <figcaption>
-                                        <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                                        <button type="button" class="btn items">25 April 2015</button>
-                                        <button type="button" class="btn items">Add comment</button>
-                                        <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                            Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                            Volumus sensibus qui ex, eum duis doming ad.</p>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div>
-                                <figure class="newsItem">
-                                    <div class="imgNews">
-                                        <img class="img-responsive" src="front/img/news_car1.jpg" alt=""/>
-                                        <div class="hoverNews text-center">
-                                            <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                    <figcaption>
-                                        <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                                        <button type="button" class="btn items">25 April 2015</button>
-                                        <button type="button" class="btn items">Add comment</button>
-                                        <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem regione ne ius.
-                                            Vis quis lobortis dissentias ex, in du aft philosophia, malis necessitatibus no mei. 
-                                            Volumus sensibus qui ex, eum duis doming ad.</p>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div>
-                                <figure class="newsItem">
-                                    <div class="imgNews">
-                                        <img class="img-responsive" src="front/img/news_car.jpg" alt=""/>
-                                        <div class="hoverNews text-center">
-                                            <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                            <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-                                        </div>
-                                    </div>
-                                    <figcaption>
-                                        <a href="#"><h4>READY FOR TRACK DAY</h4></a>
-                                        <button type="button" class="btn items">25 April 2015</button>
-                                        <button type="button" class="btn items">Add comment</button>
-                                        <p>Ea ullum liber aperiri mi, impetus ate philosophia ad duo, quem</p>
-                                    </figcaption>
-                                </figure>
-                            </div>
+                        <?php }
+                        ?>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-xs-2 controlsNews">
 
                     <span id="go-left" class="glyphicon glyphicon-menu-left"></span>
                     <span id="go-right" class="glyphicon glyphicon-menu-right"></span>
-
-
-
                 </div>
-
             </div>
         </div>
     </section>
@@ -511,63 +398,26 @@ $this->headTitle($sitemapPage['title']);
     </section>
     <section class="pumpOptions">
         <div class="container">
+           <?php foreach ($services as $service) {
+                    ?> 
             <div class="row">
+                
                 <div class="col-sm-6 col-md-3">
                     <article class="part center-block">
 
                         <figure>
-                            <img class="center-block" src="front/img/devices_icon.png" alt=""/>
+                            <h3 class="title">
+                            
+                        </h3>
                             <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
+                                <a href="#"><h3><i class="<?php echo $this->escape($service['icon']); ?>"></i> <?php echo $this->escape($service['title']); ?></h3></a>
+                                <p><?php echo $this->escape($service['description']); ?></p>
                             </figcaption>
                         </figure>
                     </article>
                 </div>
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="front/img/chip_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="front/img/sock_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <article class="part center-block">
-
-                        <figure>
-                            <img class="center-block" src="front/img/wheels_icon.png" alt=""/>
-                            <figcaption class="text-center">
-                                <a href="#"><h3>Devices</h3></a>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
-                                    College in Virginia, looked up one of the more obscure Latin words.</p>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
+                <?php }
+                        ?>
             </div>
         </div>
     </section>
