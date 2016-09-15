@@ -31,7 +31,7 @@ class ServicesController extends Zend_Controller_Action {
             'orders' => array(
                 'order_number' => 'ASC'
             ),
-            'limit' => 3
+            'limit' => 6
         ));
         $sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
         $this->view->breadcrumb = $sitemapPageBreadcrumbs;

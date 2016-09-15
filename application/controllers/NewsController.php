@@ -41,6 +41,7 @@ class NewsController extends Zend_Controller_Action
         $this->view->sitemapPage = $sitemapPage;
         $this->view->breadcrumb = $sitemapPageBreadcrumbs;
         $this->view->news = $news;
+
     }
     public function newsAction()
     {

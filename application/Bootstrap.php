@@ -118,7 +118,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ));
             }
             if($sitemapPageMap['type']=='ServicesPage'){
-                $router->addRoute('static-page-route-' . $sitemapPageId, new Zend_Controller_Router_Route_Static(//za rute koje nemaju parametre, moze i da se koristi za maskiranje putanje
+                $router->addRoute('static-page-route-' . $sitemapPageId, new Zend_Controller_Router_Route_Static(
                     $sitemapPageMap['url'], array(
                         'controller' => 'services',
                         'action' => 'index',
@@ -152,7 +152,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ));
                 $router->addRoute('news-item-route', new Zend_Controller_Router_Route(
                         $sitemapPageMap['url'] . '/:id/:news_item_slug', array(
-                    'controller' => 'catalogue',
+                    'controller' => 'news',
                     'action' => 'newsItem',
                     'sitemap_page_id' => $sitemapPageId
                         )

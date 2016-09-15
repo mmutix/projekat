@@ -53,29 +53,49 @@ class Admin_ServicesController extends Zend_Controller_Action
 				}
 				//get form data
 				$formData = $form->getValues();
-				
-				//Insertujemo novi zapis u tabelu
-				$cmsServicesTable = new Application_Model_DbTable_CmsServices();
-				
-				$cmsServicesTable->insertService($formData);
-				
-				// do actual task
-				//save to database etc
-				
-				
-				//set system message
-				$flashMessenger->addMessage('Service has been saved', 'success');
-				//redirect to same or another page
-				$redirector = $this->getHelper('Redirector');
-				$redirector->setExit(true)
-					->gotoRoute(array(
-						'controller' => 'admin_services',
-						'action' => 'index'
-						), 'default', true);
-			} catch (Application_Model_Exception_InvalidInput $ex) {
-				$systemMessages['errors'][] = $ex->getMessage();
-			}
-		}
+                                unset($formData['service_photo']);
+                                //insert service returns ID of the new service
+                                $cmsServicesTable = new Application_Model_DbTable_CmsServices();
+                                $serviceId = $cmsServicesTable->insertService($formData);
+                                
+                                if ($form->getElement('service_photo')->isUploaded()) {
+                                    
+                                    //photo is uploaded 
+                                    $fileInfos = $form->getElement('service_photo')->getFileInfo('service_photo');
+                                    $fileInfo = $fileInfos['service_photo'];
+                                    //$fileInfo = $_FILES["member_photo"];
+                                    try {
+                                        //open uploaded photo in temporary directory
+                                        $servicePhoto = Intervention\Image\ImageManagerStatic::make($fileInfo['tmp_name']);
+                                        $servicePhoto->fit(160, 160);
+                                        $servicePhoto->save(PUBLIC_PATH . '/uploads/services/' . $serviceId . '.jpg');
+                                        
+                                    } catch (Exception $ex) {
+                                        
+                                        $flashMessenger->addMessage('Service has been saved, but error occured during image processing', 'errors');
+                                        //redirect to same or another page
+                                        $redirector = $this->getHelper('Redirector');
+                                        $redirector->setExit(true)
+                                                ->gotoRoute(array(
+                                                    'controller' => 'admin_services',
+                                                    'action' => 'edit',
+                                                    'id' => $serviceId
+                                                        ), 'default', true);
+                                    }
+                                }
+                //set system message
+                            $flashMessenger->addMessage('Service has been saved', 'success');
+                            //redirect to same or another page
+                            $redirector = $this->getHelper('Redirector');
+                            $redirector->setExit(true)
+                                    ->gotoRoute(array(
+                                            'controller' => 'admin_services',
+                                            'action' => 'index'
+                                            ), 'default', true);
+                    } catch (Application_Model_Exception_InvalidInput $ex) {
+                            $systemMessages['errors'][] = $ex->getMessage();
+                    }
+            }
 		$this->view->systemMessages = $systemMessages;
 		$this->view->form = $form;
 	}
@@ -119,24 +139,50 @@ class Admin_ServicesController extends Zend_Controller_Action
 				}
 				//get form data
 				$formData = $form->getValues();
-				
-				//Radimo update postojeceg zapisa u tabeli
-				
-				$cmsServicesTable->updateService($service['id'], $formData);
-				
-				//set system message
-				$flashMessenger->addMessage('Service has been updated', 'success');
-				//redirect to same or another page
-				$redirector = $this->getHelper('Redirector');
-				$redirector->setExit(true)
-					->gotoRoute(array(
-						'controller' => 'admin_services',
-						'action' => 'index'
-						), 'default', true);
-			} catch (Application_Model_Exception_InvalidInput $ex) {
-				$systemMessages['errors'][] = $ex->getMessage();
-			}
-		}
+				 unset($formData['service_photo']);
+                
+                if($form->getElement('service_photo')->isUploaded()) {
+                    //photo is uploaded 
+                    
+                    $fileInfos = $form->getElement('service_photo')->getFileInfo('service_photo');
+                    $fileInfo = $fileInfos['service_photo'];
+                    //$fileInfo = $_FILES["member_photo"];
+                    
+                    
+                    try {
+                        //open uploaded photo in temporary directory
+                     $servicePhoto =  Intervention\Image\ImageManagerStatic::make($fileInfo['tmp_name']);
+                     
+                     $servicePhoto->fit(160, 160);
+                     
+                     $servicePhoto->save(PUBLIC_PATH . '/uploads/services/' . $service['id'] . '.jpg');
+                     
+                    } catch (Exception $ex) {
+                        
+                        throw new Application_Model_Exception_InvalidInput('Error occured during image processing');
+                      
+                    }
+
+                }
+               
+                
+                $cmsServicesTable->updateService($service['id'], $formData);
+                
+                // do actual task
+                //save to database etc
+                //set system message
+                $flashMessenger->addMessage('Service has been updated', 'success');
+                //redirect to same or another page
+                $redirector = $this->getHelper('Redirector');
+                $redirector->setExit(true)
+                        ->gotoRoute(array(
+                            'controller' => 'admin_services',
+                            'action' => 'index'
+                                ), 'default', true);
+            } catch (Application_Model_Exception_InvalidInput $ex) {
+                $systemMessages['errors'][] = $ex->getMessage();
+            }
+        }
 		$this->view->systemMessages = $systemMessages;
 		$this->view->form = $form;
 		$this->view->service = $service;
@@ -169,7 +215,7 @@ class Admin_ServicesController extends Zend_Controller_Action
             $cmsServicesTable = new Application_Model_DbTable_CmsServices();
             $service = $cmsServicesTable->getServiceById($id);
             if (empty($service)) {
-                throw new Application_Model_Exception_InvalidInput('No service is found with id: ' . $id);
+                throw new Application_Model_Exception_InvalidInput('No service is found with id: ' . $id, 'errors');
             }
             $cmsServicesTable->deleteService($id);
             $flashMessenger->addMessage('Service : ' . $service['title'] . ' has been deleted', 'success');

@@ -24,21 +24,19 @@ $this->headTitle($sitemapPage['title']);
                     <div class="col-sm-6 col-md-4">
                         <figure class="newsItem">
                             <div class="imgNews">
-                                <img class="img-responsive" src="<?php echo $this->newsImgUrl($singleNews); ?>" alt=""/>
+                                <img class="img-responsive" src="<?php echo $this->newsImgUrl($singleNews);?>" alt=""/>
                                 <div class="hoverNews text-center">
-                                    <a href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-                                    <a href="#"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-                                    <a href="#"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+                                    <a href="https://www.facebook.com/cubesdoo"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                                    <a href="https://plus.google.com/117073708024696030123/about"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+                                    <a href="https://twitter.com/cubesdoo"><span class="fa fa-twitter" aria-hidden="true"></span></a>
                                 </div>
                             </div>
 
-                            <button type="button" class="btn items date"><?php echo $this->escape($singleNews['date']); ?></button>
-                            <button type="button" class="btn items article"> View Article <?php echo $this->escape($singleNews['title']); ?></button>
+                            <button type="button" class="btn items date"><?php echo $this->escape($singleNews['date']);?></button>
+                            <button type="button" class="btn items article"> View Article <?php echo $this->escape($singleNews['title']);?></button>
                             <br>
-                            <p><span><?php echo $this->escape($singleNews['description']); ?>
+                            <p><span><?php echo $this->escape($singleNews['description']);?>
                                 </span></p>
-
-
                         </figure>
                     </div>
                 <?php }
