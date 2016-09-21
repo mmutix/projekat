@@ -3,8 +3,20 @@
 class PhotogalleriesController extends Zend_Controller_Action
 {
 	public function indexAction() {
-		$request = $this->getRequest();
-		
+            //photoGalleries 	
+            $cmsPhotoGalleriesDbTable = new Application_Model_DbTable_CmsPhotoGalleries();
+            $photoGalleries = $cmsPhotoGalleriesDbTable->search(array(
+                    'filters' => array(
+                            'status' => Application_Model_DbTable_CmsPhotoGalleries::STATUS_ENABLED
+                    ),
+                    'orders' => array(
+                            'order_number' => 'ASC'
+                    ),
+                     'limit' => 6
+            ));	
+            $request = $this->getRequest();
+            
+		//$id = (int) $request->getParam('id');
 		$sitemapPageId = (int) $request->getParam('sitemap_page_id');
 		
 		if ($sitemapPageId <= 0) {
@@ -28,16 +40,7 @@ class PhotogalleriesController extends Zend_Controller_Action
 		) {
 			throw new Zend_Controller_Router_Exception('Sitemap page is disabled', 404);
 		}
-		
-		$cmsPhotoGalleriesDbTable = new Application_Model_DbTable_CmsPhotoGalleries();
-		$photoGalleries = $cmsPhotoGalleriesDbTable->search(array(
-			'filters' => array(
-				'status' => Application_Model_DbTable_CmsPhotoGalleries::STATUS_ENABLED
-			),
-			'orders' => array(
-				'order_number' => 'ASC'
-			)
-		));
+
 		$sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
                 
 		$this->view->sitemapPage = $sitemapPage;
