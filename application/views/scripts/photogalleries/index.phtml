@@ -7,6 +7,15 @@ $this->headMeta()->appendName('description', $sitemapPage['description']);
 
 <div id="highlighted">
     <div class="container">
+                <article>
+            <ol class="breadcrumb">
+                <li><a href="<?php echo $this->baseUrl('/'); ?>">Home</a></li>
+                <?php foreach ($this->breadcrumb as $breadcrumb) { ?>
+                    <li><a href=""><?php echo $breadcrumb['short_title']; ?></a></li>
+                <?php } ?>
+            </ol>
+</article>
+        
         <div class="header">
             <h2 class="page-title">
                 <span><?php echo $this->escape($sitemapPage['title']); ?></span>

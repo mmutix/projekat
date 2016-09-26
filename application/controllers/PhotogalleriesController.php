@@ -49,9 +49,9 @@ class PhotogalleriesController extends Zend_Controller_Action
 	}
 	
 	public function galleryAction() {
-		$request = $this->getRequest();
 		
-		
+            $request = $this->getRequest();
+
 		/******** Get PhotoGalleriesPage from sitemap *******/
 		$sitemapPageId = (int) $request->getParam('sitemap_page_id');
 		
@@ -66,7 +66,6 @@ class PhotogalleriesController extends Zend_Controller_Action
 		if (!$sitemapPage) {
 			throw new Zend_Controller_Router_Exception('No sitemap page is found for id: ' . $sitemapPageId, 404);
 		}
-		/******** Get PhotoGalleriesPage from sitemap *******/
 		
 		$id = (int) $request->getParam('id');
 		

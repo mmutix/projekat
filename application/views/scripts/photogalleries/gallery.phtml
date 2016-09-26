@@ -1,8 +1,68 @@
 <?php
-
+$sitemapPage=$this->sitemapPage;
+$photoGallery = $this->photoGallery;
+$photos = $this->photos;
 /*** treba da naslov u tabu u browseru bude Naslov Foto Galerije | Foto Galerije | Cubes CMS ***/
-$this->headTitle($this->sitemapPage['title']);
 $this->headTitle($this->photoGallery['title']);
-
+$this->headTitle($this->sitemapPage['title']);
 $this->headMeta()->appendName('description', $this->photoGallery['description']);
 ?>
+<main>
+    <div class="container">
+
+        <article>
+            <ol class="breadcrumb">
+                <li><a href="<?php echo $this->baseUrl('/'); ?>">Home</a></li>
+                <?php foreach ($this->breadcrumb as $breadcrumb) { ?>
+                    <li><a href=""><?php echo $breadcrumb['title']; ?></a></li>
+                <?php } ?>
+            </ol>
+        </article>
+        
+            
+        
+        <div id="content">
+            <a href="<?php echo $this->sitemapPageUrl($sitemapPage['id']); ?>" class="btn btn-xs btn-default back-link"><i class="fa fa-arrow-left"></i> Back to all photo galleries</a>
+            <h3 class="block-title">
+                               <p><span><?php echo $this->escape($photoGallery['title']); ?></span></p>
+                            </h3>
+            <div class="container portfolio">
+                <!--Portfolio feature item-->
+                <div class="row">
+                    <div class="col-md-7 project-photos">
+                        <!-- Slider for project pictures -->
+                        <div id="photo-gallery-slider-id" class="carousel slide">
+                            <div class="col-md-5 sidebar sidebar-right">
+                        <!-- quick details -->
+                        <div class="block">
+                            
+                            <div class="block">
+                                <p><?php echo $this->escape($photoGallery['description']); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                            <div class="carousel-inner">
+                                
+                                <?php foreach ($photos as $index => $photo) { ?>
+                                    <div class="item <?php echo $index == 0 ? 'active' : ''; ?>">
+                                        <img src="<?php echo $this->photoUrl($photo); ?>" alt="<?php echo $this->escape($photo['title']); ?>" />
+                                        <!--									<div class="carousel-caption">
+                                                                                                                        <h4>
+                                        <?php echo $this->escape($photo['title']); ?>
+</div>-->
+                                    </div>
+                                <?php } ?>
+                                
+                            </div>
+                            <a class="left carousel-control" href="#photo-gallery-slider-id" data-slide="prev">
+                                &lsaquo;</a> 
+                            <a class="right carousel-control" href="#photo-gallery-slider-id" data-slide="next">
+                                &rsaquo;</a> 
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
