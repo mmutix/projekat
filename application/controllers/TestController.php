@@ -1,22 +1,9 @@
 <?php
-
 class PhotogalleriesController extends Zend_Controller_Action
 {
 	public function indexAction() {
-            //photoGalleries 	
-            $cmsPhotoGalleriesDbTable = new Application_Model_DbTable_CmsPhotoGalleries();
-            $photoGalleries = $cmsPhotoGalleriesDbTable->search(array(
-                    'filters' => array(
-                            'status' => Application_Model_DbTable_CmsPhotoGalleries::STATUS_ENABLED
-                    ),
-                    'orders' => array(
-                            'order_number' => 'ASC'
-                    ),
-                     'limit' => 6
-            ));	
-            $request = $this->getRequest();
-            
-		//$id = (int) $request->getParam('id');
+		$request = $this->getRequest();
+		
 		$sitemapPageId = (int) $request->getParam('sitemap_page_id');
 		
 		if ($sitemapPageId <= 0) {
@@ -40,19 +27,30 @@ class PhotogalleriesController extends Zend_Controller_Action
 		) {
 			throw new Zend_Controller_Router_Exception('Sitemap page is disabled', 404);
 		}
-
-		$sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
+		
+		$cmsPhotoGalleriesDbTable = new Application_Model_DbTable_CmsPhotoGalleries();
+		$photoGalleries = $cmsPhotoGalleriesDbTable->search(array(
+			'filters' => array(
+				'status' => Application_Model_DbTable_CmsPhotoGalleries::STATUS_ENABLED
+			),
+			'orders' => array(
+				'order_number' => 'ASC',
+                            ),
+                                'limit' => 6,
+			
+		));
+                $sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
                 
+		$this->view->breadcrumb = $sitemapPageBreadcrumbs;
 		$this->view->sitemapPage = $sitemapPage;
 		$this->view->photoGalleries = $photoGalleries;
-                $this->view->breadcrumb = $sitemapPageBreadcrumbs;
 	}
 	
 	public function galleryAction() {
+		$request = $this->getRequest();
 		
-            $request = $this->getRequest();
-
-		// Get PhotoGalleriesPage from sitemap 
+		
+		/******** Get PhotoGalleriesPage from sitemap *******/
 		$sitemapPageId = (int) $request->getParam('sitemap_page_id');
 		
 		if ($sitemapPageId <= 0) {
@@ -66,6 +64,7 @@ class PhotogalleriesController extends Zend_Controller_Action
 		if (!$sitemapPage) {
 			throw new Zend_Controller_Router_Exception('No sitemap page is found for id: ' . $sitemapPageId, 404);
 		}
+		/******** Get PhotoGalleriesPage from sitemap *******/
 		
 		$id = (int) $request->getParam('id');
 		
@@ -92,13 +91,12 @@ class PhotogalleriesController extends Zend_Controller_Action
 				'order_number' => 'ASC'
 			)
 		));
-                $sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
-		
+                
+		$sitemapPageBreadcrumbs = $cmsSitemapPageDbTable->getSitemapPageBreadcrumbs($sitemapPageId);
+                
+		$this->view->breadcrumb = $sitemapPageBreadcrumbs;
 		$this->view->sitemapPage = $sitemapPage;
 		$this->view->photoGallery = $photoGallery;
 		$this->view->photos = $photos;
-                $this->view->breadcrumb = $sitemapPageBreadcrumbs;
-                
 	}
 }
-

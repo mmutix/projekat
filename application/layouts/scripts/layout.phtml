@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </section>
-            <section  class="navigation">
+            <section  class="navigation" id="top-nav">
                 <div class="container">
                     <article class="navigation-bar">
                         <nav class="navbar navbar-inverse">
@@ -217,6 +217,7 @@
                             <ul class="nav navbar-nav">
                                 <?php echo $this->topMenuHtml();?>
                             </ul>
+                            <a  href="#top-nav" class="btn btn-default" type="button">To top</a>
                             <ul class="nav navbar-nav navbar-right socialNetwork">
                                 <li>
                                     <a href="https://www.facebook.com/cubesdoo"><span class="fa fa-facebook" aria-hidden="true"></span></a>
@@ -232,7 +233,7 @@
                 </article>
 
             </div>
-            <section class="payments">
+            
                 <div class="container">
                     <div>
                         <ul class="nav navbar-nav">
@@ -248,9 +249,9 @@
                                 </a>
                             </li>-->
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-collapse">
                             <li>
-                                <a href="">© 2016 Car Service Center ©  All Rights Reserved</a>
+                                <a href="<?php echo $this->baseUrl('/');?>" alt="Car Service Center">© 2016 Car Service Center ©  All Rights Reserved</a>
                             </li>  
 
 
@@ -258,7 +259,7 @@
                     </div>
 
                 </div>
-            </section>
+          
             <section class="development ">
                 <p class="text-center">This project was implemented in <a href="http://school.cubes.rs">CUBES SCHOOL</a>. Project realised by: FRONTEND <a href="#">Ivan Trickovic</a>, BACKEND <a href="#">Miroslav Mutic</a></p>
             </section>
@@ -304,6 +305,10 @@
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
+        $("a[href='#top-nav']").click(function() {
+  $("html, body").animate({ scrollTop: 0 }, "slow");
+  return false;
+});
         (function (b, o, i, l, e, r) {
             b.GoogleAnalyticsObject = l;
             b[l] || (b[l] =

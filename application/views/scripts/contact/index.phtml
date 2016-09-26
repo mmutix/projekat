@@ -3,17 +3,16 @@ $sitemapPage = $this->sitemapPage;
 $this->headTitle($sitemapPage['title']);
 //$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
-<section class="bredcrumbs breadcrumbsPage">
-
     <div class="container">
         <article>
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="<?php echo $this->baseUrl('/'); ?>">Home</a></li>
+                <?php foreach ($this->breadcrumb as $breadcrumb) { ?>
+                    <li><a href=""><?php echo $breadcrumb['short_title']; ?></a></li>
+                <?php } ?>
             </ol>
         </article>
     </div>
-</section>
 <main class="contactUs">
     <section class="googleMap">
         <div class="mapWrapper">
@@ -31,7 +30,7 @@ $this->headTitle($sitemapPage['title']);
 
                     <div class="col-lg-6">
                         <div class="adress">
-                            <h3>1-800-987-0654 321</h3>
+                            <h3>+381111234567890</h3>
                             <p>MIHAILO PUPIN BLVD., BELGRADE, PC 11000</p>
                         </div>
                     </div>
@@ -49,7 +48,7 @@ $this->headTitle($sitemapPage['title']);
                                 <input type="text" class="form-control" placeholder="Email" aria-label="...">
                             </div><!-- /input-group -->
                         </div><!-- /.col-lg-6 -->
-                        <div class="col-xs-12">
+                        <div class="col-xs-4">
                             <div class="input-group">
                                 <button class="btn btn-default formBtn" type="submit">Contact Us</button>
                             </div><!-- /input-group -->
@@ -82,23 +81,23 @@ $this->headTitle($sitemapPage['title']);
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <p><img  src="img/mail_icon.png" alt=""/><a href="mailto:school@cubes.rs"> email@email.com</a></p>
+                    <p><img  src="front/img/mail_icon.png" alt=""/><a href="mailto:school@cubes.rs"> email@email.com</a></p>
 
                 </div>
                 <div class="col-md-4">
-                    <p><img  src="img/skype_icon.png" alt=""/>gear.psdtemplate</a></p>
+                    <p><img  src="front/img/skype_icon.png" alt=""/>gear.psdtemplate</a></p>
                 </div>
                 <div class="col-md-4">
-                    <p><img  src="img/phone_icon_1.png" alt=""/>1-800-987-0654 321</p>
+                    <p><img  src="front/img/phone_icon_1.png" alt=""/>+381111234567890</p>
                 </div>
             </div>
         </div>
 
     </section>
-    <section class="information">
+<!--    <section class="information">
         <div class="container">
             <div class="row">
-<!--                <div class="col-sm-8 col-md-6">
+                <div class="col-sm-8 col-md-6">
                     <h3>Catalog</h3>
                     <div class="row">
                         <div class="col-md-4">
@@ -120,8 +119,8 @@ $this->headTitle($sitemapPage['title']);
                         </div>
                     </div>
 
-                </div>-->
-<!--                <div class=" col-md-3">
+                </div>
+                <div class=" col-md-3">
                     <h3>Delivery Information</h3>
                     <p><a href="">Delivery Information</a></p>
                     <p><a href="">Privacy policy</a></p>
@@ -134,8 +133,8 @@ $this->headTitle($sitemapPage['title']);
                     <p><a href="">My Account</a></p>
                     <p><a href="">Returns</a></p>
                     <p><a href="">Site map</a></p>
-                </div>-->
+                </div>
             </div>
         </div>
-    </section>           
+    </section>           -->
 </main>
