@@ -94,9 +94,9 @@ sirinaNewsImg = parseInt(sirina);
     
 function init_map(){
     var myOptions = {
+        scrollwheel: false,
         zoom:14,
         center:new google.maps.LatLng(44.831193,20.610080),
-        scrollwheel: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('gmap_canvas'), 

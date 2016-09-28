@@ -217,7 +217,6 @@
                             <ul class="nav navbar-nav">
                                 <?php echo $this->topMenuHtml();?>
                             </ul>
-                            <a  href="#top-nav" class="btn btn-default" type="button">To top</a>
                             <ul class="nav navbar-nav navbar-right socialNetwork">
                                 <li>
                                     <a href="https://www.facebook.com/cubesdoo"><span class="fa fa-facebook" aria-hidden="true"></span></a>
@@ -286,7 +285,7 @@
                 </div>
             </div>
         </div>
-
+        <a href="#" id="back-to-top" title="Back to top">&uarr;</a>
         <!--Scripts -->
         <?php echo $this->inlineScript(); ?>
     
@@ -323,6 +322,28 @@
         }(window, document, 'script', 'ga'));
         ga('create', 'UA-XXXXX-X', 'auto');
         ga('send', 'pageview');
+        
+        if ($('#back-to-top').length) {
+            var scrollTrigger = 100, // px
+                backToTop = function () {
+                    var scrollTop = $(window).scrollTop();
+                    if (scrollTop > scrollTrigger) {
+                        $('#back-to-top').addClass('show');
+                    } else {
+                        $('#back-to-top').removeClass('show');
+                    }
+                };
+            backToTop();
+            $(window).on('scroll', function () {
+                backToTop();
+            });
+            $('#back-to-top').on('click', function (e) {
+                e.preventDefault();
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 700);
+            });
+        }
     </script>
   </body>
 </html>
