@@ -190,3 +190,18 @@ aside.options > h2{
 
 
 }
+
+@media (max-width: 500px) {
+    .navbar-inverse .navbar-brand {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 300px) {
+    .navbar-brand > img{
+        display: none;
+    }
+    .navbar-inverse .navbar-brand {
+        font-size: 12px;
+    }
+}
