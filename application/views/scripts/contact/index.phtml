@@ -1,5 +1,8 @@
 <?php
 $sitemapPage = $this->sitemapPage;
+$form = $this->form;
+$systemMessages = $this->systemMessages;
+$form->setElementDecorators(array('ViewHelper'));
 $this->headTitle($sitemapPage['title']);
 //$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
@@ -36,26 +39,94 @@ $this->headTitle($sitemapPage['title']);
                     </div>
                 </div>
 
-                <form class="form-group">
+                <form class="form-group">   
+                    <div class="row">
+                        
+                                       <?php 
+                    if($systemMessages == "init"){ ?>
+                        <form method="post" action="" id="contact-form">
+                            <input type="hidden" name="task" value="contact">
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <?php
+                                echo $form->getElement('name')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'Enter your name',
+                                    'id' => 'name',
+                                    'required' => 'required'
+                                ));
+                                ?>
+                                <?php if ($form->getElement('name')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('name')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?> 
+
+                                </div><!-- /input-group -->
+                                </div>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                <?php
+                                echo $form->getElement('email')->setAttribs(array(
+                                    'class' => 'form-control input-md',
+                                    'placeholder' => 'Enter your email',
+                                    'id' => 'email',
+                                    'required' => 'required',
+                                    'type' => 'email'
+                                ));
+                                ?>
+                                <?php if ($form->getElement('email')->hasErrors()) { ?>
+                                    <div class="has-error">
+                                        <?php foreach ($form->getElement('email')->getMessages() as $message) { ?>
+                                            <p class="help-block"><?php echo $this->escape($message); ?></p>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?> 
+
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        
+                            
+                        <div class="col-xs-4">
+                            <div class="input-group">
+                         <input type="submit" value="Contact Us" class="btn btn-primary">
+                        </div> 
+                        </div>
+                    </div><!-- /.row -->
+                </form>	
+                        <?php
+                    } else {
+                        if ($systemMessages == "Error") {
+                            echo "An error occurred while sending the message. ";
+                        }
+                        if ($systemMessages == "Success") {
+                            echo "Message has been sent. ";
+                        }
+                    }
+                    ?>
+<!--                                <form class="form-group">   
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Name" aria-label="...">
-                            </div><!-- /input-group -->
-                        </div><!-- /.col-lg-6 -->
+                            </div> /input-group 
+                        </div> /.col-lg-6 
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Email" aria-label="...">
-                            </div><!-- /input-group -->
-                        </div><!-- /.col-lg-6 -->
+                            </div> /input-group 
+                        </div> /.col-lg-6 
                         <div class="col-xs-4">
                             <div class="input-group">
                                 <button class="btn btn-default formBtn" type="submit">Contact Us</button>
-                            </div><!-- /input-group -->
+                            </div> /input-group 
                         </div>
 
-                    </div><!-- /.row -->
-                </form>			    
+                    </div> /.row 
+                </form>	-->
+                
             </div>
         </div>
     </section>
