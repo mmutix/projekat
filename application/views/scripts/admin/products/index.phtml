@@ -25,12 +25,14 @@ $this->headTitle('Products');
                 <table id="rows-table" class="table table-striped table-hover">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th class="text-center">Stockpile </th>
-                            <th>Procurer</th>
-                            <th>Category</th>
+                            <th>Action</th>
+                            <th>Model</th>
+                            <th>Type</th>
                             <th>Price</th>
-                            <th>Status</th>
                             <th>Quantity</th>
+                            <th>Discount</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -166,18 +168,18 @@ $this->headTitle('Products');
 
 
 </div>
-<!--//
-//$this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/jquery-ui-1.12.0/jquery-ui.min.css'));
-//$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/jquery-ui-1.12.0/jquery-ui.min.js'));
-//-->
+<?php
+  $this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/jquery-ui-1.12.0/jquery-ui.min.css'));
+  $this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/jquery-ui-1.12.0/jquery-ui.min.js'));
+?>
 
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'));
-//$this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/datatables-responsive/css/dataTables.responsive.css'));
-$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/datatables/media/js/jquery.dataTables.min.js'));
-$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'));
-$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/datatables-responsive/js/dataTables.responsive.js'));
-?>
+//$this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'));
+////$this->headLink()->appendStylesheet($this->baseUrl('/admin/bower_components/datatables-responsive/css/dataTables.responsive.css'));
+//$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/datatables/media/js/jquery.dataTables.min.js'));
+//$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'));
+//$this->inlineScript()->appendFile($this->baseUrl('/admin/bower_components/datatables-responsive/js/dataTables.responsive.js'));
+//?>
 <script>
 <?php $this->inlineScript()->captureStart(); ?>
     $('#rows-table').on('click', '[data-action="delete"]', function (e) {

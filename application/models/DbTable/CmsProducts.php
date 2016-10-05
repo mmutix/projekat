@@ -98,7 +98,7 @@ class Application_Model_DbTable_CmsProducts extends Zend_Db_Table_Abstract {
      */
     public function disableProduct($id) {
         $this->update(array(
-            'stock_status' => self::STATUS_DISABLED
+            'supply_status' => self::STATUS_DISABLED
                 ), 'id = ' . $id);
     }
 
@@ -108,7 +108,7 @@ class Application_Model_DbTable_CmsProducts extends Zend_Db_Table_Abstract {
      */
     public function enableProduct($id) {
         $this->update(array(
-            'stock_status' => self::STATUS_ENABLED
+            'supply_status' => self::STATUS_ENABLED
                 ), 'id = ' . $id);
     }
 
@@ -171,15 +171,15 @@ class Application_Model_DbTable_CmsProducts extends Zend_Db_Table_Abstract {
             foreach ($orders as $field => $orderDirection) {
                 switch ($field) {
                     case 'id':
-                    case 'stock_status':
-                    case 'action':
                     case 'model':
                     case 'type':
                     case 'description':
-                    case 'order_number':
                     case 'price':
                     case 'quantity':
+                    case 'supply_status':  
                     case 'discount':
+                    case 'action':
+                    case 'order_number':
                     case 'date':
 
                         if ($orderDirection === 'DESC') {
@@ -238,15 +238,15 @@ class Application_Model_DbTable_CmsProducts extends Zend_Db_Table_Abstract {
         foreach ($filters as $field => $value) {
             switch ($field) {
                 case 'id':
-                case 'stock_status':
-                case 'action':
                 case 'model':
                 case 'type':
                 case 'description':
-                case 'order_number':
                 case 'price':
                 case 'quantity':
+                case 'supply_status':  
                 case 'discount':
+                case 'action':
+                case 'order_number':
                 case 'date':
 
                     if (is_array($value)) {
