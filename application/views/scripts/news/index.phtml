@@ -1,6 +1,7 @@
 <?php
 $sitemapPage = $this->sitemapPage;
 $news = $this->news;
+$singleNews = $this->singleNews; 
 $this->headTitle($sitemapPage['title']);
 //$this->headMeta()->appendName('description', $sitemapPage['description']);
 ?>
@@ -8,9 +9,9 @@ $this->headTitle($sitemapPage['title']);
 <div class="container">
     <article>
         <ol class="breadcrumb">
-            <li><a href="<?php echo $this->baseUrl('/'); ?>">Home</a></li>
+            <li><a href="<?php echo $this->baseUrl('/');?>">Home</a></li>
             <?php foreach ($this->breadcrumb as $breadcrumb) { ?>
-                <li><a href=""><?php echo $breadcrumb['short_title']; ?></a></li>
+                <li><a href=""><?php echo $breadcrumb['short_title'];?></a></li>
             <?php } ?>
         </ol>
     </article>
@@ -31,12 +32,14 @@ $this->headTitle($sitemapPage['title']);
                                     <a href="https://twitter.com/cubesdoo"><span class="fa fa-twitter" aria-hidden="true"></span></a>
                                 </div>
                             </div>
-
+                            <figcaption>
+                                    <a href="#"><h4><?php echo $this->escape($singleNews['title']);?></h4></a>
                             <button type="button" class="btn items date"><?php echo $this->escape($singleNews['date']);?></button>
-                            <button type="button" class="btn items article"> View Article <?php echo $this->escape($singleNews['title']);?></button>
-                            <br>
+                            <a href="<?php echo $this->singlenewsUrl($singleNews);?>" target="_blank"><button type="button" class="btn items article"> View Article </button>
+                            </a>
                             <p><span><?php echo $this->escape($singleNews['description']);?>
                                 </span></p>
+                                </figcaption>
                         </figure>
                     </div>
                 <?php }
